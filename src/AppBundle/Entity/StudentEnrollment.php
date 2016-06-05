@@ -17,4 +17,38 @@ class StudentEnrollment
      */
     private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Course")
+     */
+    private $course;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Student")
+     */
+    private $student;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getCourse()
+    {
+        return $this->course;
+    }
+
+    public function setCourse($course)
+    {
+        $this->course = $course;
+    }
+
+    public function getStudent()
+    {
+        return $this->student;
+    }
+
+    public function setStudent($student)
+    {
+        $this->student = $student;
+    }
 }
