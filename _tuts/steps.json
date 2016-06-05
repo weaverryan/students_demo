@@ -1,0 +1,40 @@
+{
+    "steps": [
+        {
+            "id": "start",
+            "name": "start",
+            "description": null
+        },
+        {
+            "id": "setup-install-doctrinemigrationsbundle",
+            "name": "Setup: Install DoctrineMigrationsBundle",
+            "description": null
+        },
+        {
+            "id": "models-add-course-student",
+            "name": "Models: Add Course & Student",
+            "description": null
+        },
+        {
+            "id": "models-simple-studentenrollment",
+            "name": "Models: Simple StudentEnrollment",
+            "description": null
+        },
+        {
+            "id": "models-required-relationships",
+            "name": "Models: Required relationships",
+            "description": null
+        },
+        {
+            "id": "fixtures-install-alicebundle",
+            "name": "Fixtures: Install AliceBundle",
+            "description": null
+        },
+        {
+            "id": "fixtures-add-fixtures",
+            "name": "Fixtures: Add Fixtures",
+            "description": null
+        }
+    ],
+    "sha": "789f690f1acd76ccd17af6b24104d79cca7bac9d"
+}
