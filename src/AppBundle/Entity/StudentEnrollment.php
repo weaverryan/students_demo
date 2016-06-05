@@ -19,11 +19,13 @@ class StudentEnrollment
 
     /**
      * @ORM\ManyToOne(targetEntity="Course")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $course;
 
     /**
      * @ORM\ManyToOne(targetEntity="Student")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $student;
 
@@ -32,22 +34,28 @@ class StudentEnrollment
         return $this->id;
     }
 
+    /**
+     * @return Course
+     */
     public function getCourse()
     {
         return $this->course;
     }
 
-    public function setCourse($course)
+    public function setCourse(Course $course)
     {
         $this->course = $course;
     }
 
+    /**
+     * @return Student
+     */
     public function getStudent()
     {
         return $this->student;
     }
 
-    public function setStudent($student)
+    public function setStudent(Student $student)
     {
         $this->student = $student;
     }
