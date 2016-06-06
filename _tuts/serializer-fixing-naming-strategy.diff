@@ -1,16 +1,12 @@
 diff --git a/app/config/config.yml b/app/config/config.yml
-index 1db9a03..7a96f7e 100644
+index 1db9a03..60f1a03 100644
 --- a/app/config/config.yml
 +++ b/app/config/config.yml
-@@ -70,3 +70,8 @@ swiftmailer:
+@@ -70,3 +70,4 @@ swiftmailer:
  hautelook_alice:
      db_drivers:
          orm: ~
 +
-+jms_serializer:
-+    property_naming:
-+        separator: ''
-+        lower_case: true
 diff --git a/app/config/services.yml b/app/config/services.yml
 index 5c76fc5..c66886c 100644
 --- a/app/config/services.yml

@@ -189,7 +189,17 @@
             "id": "enrollment-use-property-path",
             "name": "Enrollment: Use property_path",
             "description": null
+        },
+        {
+            "id": "serializer-exclude-expose-virtualproperty",
+            "name": "Serializer: Exclude, expose & VirtualProperty",
+            "description": null
+        },
+        {
+            "id": "course-create-basic-edit-page",
+            "name": "Course: Create basic edit page",
+            "description": null
         }
     ],
-    "sha": "00aa64ec7c148faf7ca9d50f3ff1f2b2101f96b3"
+    "sha": "8237ed364e38c907f1bf48fc690ae979f60d65cd"
 }
