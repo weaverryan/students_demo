@@ -1,0 +1,28 @@
+diff --git a/app/config/config.yml b/app/config/config.yml
+index 1db9a03..7a96f7e 100644
+--- a/app/config/config.yml
++++ b/app/config/config.yml
+@@ -70,3 +70,8 @@ swiftmailer:
+ hautelook_alice:
+     db_drivers:
+         orm: ~
++
++jms_serializer:
++    property_naming:
++        separator: ''
++        lower_case: true
+diff --git a/app/config/services.yml b/app/config/services.yml
+index 5c76fc5..c66886c 100644
+--- a/app/config/services.yml
++++ b/app/config/services.yml
+@@ -1,7 +1,9 @@
+ # Learn more about services, parameters and containers at
+ # http://symfony.com/doc/current/book/service_container.html
+ parameters:
+-#    parameter_name: value
++    # a hack - should be configurable under jms_serializer, but the property_naming.id
++    # doesn't seem to be taken into account at all.
++    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
+ 
+ services:
+ #    service_name:

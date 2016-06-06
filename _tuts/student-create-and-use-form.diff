@@ -1,0 +1,78 @@
+diff --git a/src/AppBundle/Controller/Api/StudentController.php b/src/AppBundle/Controller/Api/StudentController.php
+index 7a9efdb..2d6014d 100644
+--- a/src/AppBundle/Controller/Api/StudentController.php
++++ b/src/AppBundle/Controller/Api/StudentController.php
+@@ -2,10 +2,14 @@
+ 
+ namespace AppBundle\Controller\Api;
+ 
++use AppBundle\Entity\Student;
++use AppBundle\Form\StudentForm;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+ use Symfony\Component\HttpFoundation\JsonResponse;
++use Symfony\Component\HttpFoundation\Request;
++use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+ 
+ class StudentController extends Controller
+ {
+@@ -13,8 +17,23 @@ class StudentController extends Controller
+      * @Route("/api/students", name="api_student_create")
+      * @Method("POST")
+      */
+-    public function createAction()
++    public function createAction(Request $request)
+     {
+-        return new JsonResponse([], 201);
++        $form = $this->createForm(StudentForm::class);
++        $data = json_decode($request->getContent(), true);
++        $form->submit($data);
++
++        if (!$form->isValid()) {
++            throw new BadRequestHttpException();
++        }
++
++        /** @var Student $student */
++        $student = $form->getData();
++
++        $em = $this->getDoctrine()->getManager();
++        $em->persist($student);
++        $em->flush();
++
++        return new JsonResponse(['id' => $student->getId()], 201);
+     }
+ }
+diff --git a/src/AppBundle/Form/StudentForm.php b/src/AppBundle/Form/StudentForm.php
+new file mode 100644
+index 0000000..593ed0d
+--- /dev/null
++++ b/src/AppBundle/Form/StudentForm.php
+@@ -0,0 +1,27 @@
++<?php
++
++namespace AppBundle\Form;
++
++use AppBundle\Entity\Student;
++use Symfony\Component\Form\AbstractType;
++use Symfony\Component\Form\FormBuilderInterface;
++use Symfony\Component\OptionsResolver\OptionsResolver;
++
++class StudentForm extends AbstractType
++{
++    public function buildForm(FormBuilderInterface $builder, array $options)
++    {
++        $builder
++            ->add('email')
++            ->add('firstName')
++            ->add('lastName')
++        ;
++    }
++
++    public function configureOptions(OptionsResolver $resolver)
++    {
++        $resolver->setDefaults([
++            'data_class' => Student::class
++        ]);
++    }
++}
