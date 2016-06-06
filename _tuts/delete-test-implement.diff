@@ -1,0 +1,39 @@
+diff --git a/src/AppBundle/Controller/Api/StudentController.php b/src/AppBundle/Controller/Api/StudentController.php
+index b0f29af..718042d 100644
+--- a/src/AppBundle/Controller/Api/StudentController.php
++++ b/src/AppBundle/Controller/Api/StudentController.php
+@@ -57,4 +57,16 @@ class StudentController extends ApiBaseController
+ 
+         return $this->createApiResponse($student);
+     }
++
++    /**
++     * @Route("/api/students/{id}", name="api_student_delete")
++     */
++    public function deleteAction(Student $student)
++    {
++        $em = $this->getDoctrine()->getManager();
++        $em->remove($student);
++        $em->flush();
++
++        return new Response(null, 204);
++    }
+ }
+diff --git a/tests/AppBundle/Controller/StudentControllerTest.php b/tests/AppBundle/Controller/StudentControllerTest.php
+index e4b3d82..533e190 100644
+--- a/tests/AppBundle/Controller/StudentControllerTest.php
++++ b/tests/AppBundle/Controller/StudentControllerTest.php
+@@ -96,4 +96,13 @@ class StudentControllerTest extends ApiTestCase
+             'This email is already taken'
+         );
+     }
++
++    public function testDelete()
++    {
++        $student = $this->createStudent('weaverryan@gmail.com');
++
++        $response = $this->client->delete(sprintf('/api/students/%s', $student->getId()));
++
++        $this->assertEquals(204, $response->getStatusCode());
++    }
+ }
