@@ -1,19 +1,19 @@
 diff --git a/src/AppBundle/Controller/Api/ApiBaseController.php b/src/AppBundle/Controller/Api/ApiBaseController.php
-index b6b697d..0e4b03a 100644
+index 88b36b7..94012d0 100644
 --- a/src/AppBundle/Controller/Api/ApiBaseController.php
 +++ b/src/AppBundle/Controller/Api/ApiBaseController.php
-@@ -4,6 +4,8 @@ namespace AppBundle\Controller\Api;
- 
+@@ -5,6 +5,8 @@ namespace AppBundle\Controller\Api;
+ use JMS\Serializer\SerializationContext;
  use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  use Symfony\Component\Form\Form;
 +use Symfony\Component\Form\FormInterface;
 +use Symfony\Component\HttpFoundation\JsonResponse;
  use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
  
- abstract class ApiBaseController extends Controller
-@@ -17,4 +19,32 @@ abstract class ApiBaseController extends Controller
-         $data = json_decode($request->getContent(), true);
-         $form->submit($data, !$request->isMethod('PATCH'));
+@@ -37,4 +39,33 @@ abstract class ApiBaseController extends Controller
+             'Content-Type' => 'application/json'
+         ]);
      }
 -}
 \ No newline at end of file
@@ -46,8 +46,9 @@ index b6b697d..0e4b03a 100644
 +        return $errors;
 +    }
 +}
++
 diff --git a/src/AppBundle/Controller/Api/StudentController.php b/src/AppBundle/Controller/Api/StudentController.php
-index 8dac3d6..66f7c5c 100644
+index 0482e59..b0f29af 100644
 --- a/src/AppBundle/Controller/Api/StudentController.php
 +++ b/src/AppBundle/Controller/Api/StudentController.php
 @@ -25,7 +25,7 @@ class StudentController extends ApiBaseController
@@ -59,7 +60,7 @@ index 8dac3d6..66f7c5c 100644
          }
  
          /** @var Student $student */
-@@ -53,7 +53,7 @@ class StudentController extends ApiBaseController
+@@ -48,7 +48,7 @@ class StudentController extends ApiBaseController
          $this->submitForm($request, $form);
  
          if (!$form->isValid()) {
