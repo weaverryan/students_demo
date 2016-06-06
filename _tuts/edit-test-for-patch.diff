@@ -1,28 +1,30 @@
 diff --git a/tests/AppBundle/Controller/StudentControllerTest.php b/tests/AppBundle/Controller/StudentControllerTest.php
-index cbe85f4..38f8375 100644
+index 38f8375..0658a2d 100644
 --- a/tests/AppBundle/Controller/StudentControllerTest.php
 +++ b/tests/AppBundle/Controller/StudentControllerTest.php
-@@ -28,4 +28,27 @@ class StudentControllerTest extends ApiTestCase
-             'Ryan'
+@@ -51,4 +51,29 @@ class StudentControllerTest extends ApiTestCase
+             'Ryan2'
          );
      }
 +
-+    public function testPUTEditStudent()
++    public function testPATCHEditStudent()
 +    {
 +        $student = $this->createStudent('weaverryan@gmail.com', 'Ryan');
 +
 +        $data = [
-+            'email' => 'weaverryan@gmail.com',
 +            'firstName' => 'Ryan2',
 +        ];
 +
-+        $response = $this->client->put(sprintf('/api/students/%s', $student->getId()), [
++        $response = $this->client->patch(sprintf('/api/students/%s', $student->getId()), [
 +            'body' => json_encode($data)
 +        ]);
 +
 +        $this->assertEquals(200, $response->getStatusCode());
-+        $this->asserter()
-+            ->assertResponsePropertyEquals($response, 'id', $student->getId());
++        $this->asserter()->assertResponsePropertyEquals(
++            $response,
++            'email',
++            'weaverryan@gmail.com'
++        );
 +        $this->asserter()->assertResponsePropertyEquals(
 +            $response,
 +            'firstName',
