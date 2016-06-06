@@ -1,8 +1,8 @@
 diff --git a/app/config/config.yml b/app/config/config.yml
-index 558ec9f..ee95365 100644
+index b0b4271..8228f8d 100644
 --- a/app/config/config.yml
 +++ b/app/config/config.yml
-@@ -83,3 +83,4 @@ fos_rest:
+@@ -78,3 +78,4 @@ fos_rest:
          enabled: true
          rules:
              - { path: '^/api', priorities: ['json'], fallback_format: 'json' }
