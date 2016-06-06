@@ -1,0 +1,66 @@
+diff --git a/src/AppBundle/Controller/Api/ApiBaseController.php b/src/AppBundle/Controller/Api/ApiBaseController.php
+new file mode 100644
+index 0000000..bf3b17b
+--- /dev/null
++++ b/src/AppBundle/Controller/Api/ApiBaseController.php
+@@ -0,0 +1,20 @@
++<?php
++
++namespace AppBundle\Controller\Api;
++
++use Symfony\Bundle\FrameworkBundle\Controller\Controller;
++use Symfony\Component\Form\Form;
++use Symfony\Component\HttpFoundation\Request;
++
++abstract class ApiBaseController extends Controller
++{
++    /**
++     * @param Request $request
++     * @param Form $form
++     */
++    protected function submitForm(Request $request, Form $form)
++    {
++        $data = json_decode($request->getContent(), true);
++        $form->submit($data);
++    }
++}
+\ No newline at end of file
+diff --git a/src/AppBundle/Controller/Api/StudentController.php b/src/AppBundle/Controller/Api/StudentController.php
+index b57aee6..3521fe0 100644
+--- a/src/AppBundle/Controller/Api/StudentController.php
++++ b/src/AppBundle/Controller/Api/StudentController.php
+@@ -7,12 +7,13 @@ use AppBundle\Form\StudentForm;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
++use Symfony\Component\Form\Form;
+ use Symfony\Component\HttpFoundation\JsonResponse;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+ 
+-class StudentController extends Controller
++class StudentController extends ApiBaseController
+ {
+     /**
+      * @Route("/api/students", name="api_student_create")
+@@ -21,8 +22,7 @@ class StudentController extends Controller
+     public function createAction(Request $request)
+     {
+         $form = $this->createForm(StudentForm::class);
+-        $data = json_decode($request->getContent(), true);
+-        $form->submit($data);
++        $this->submitForm($request, $form);
+ 
+         if (!$form->isValid()) {
+             throw new BadRequestHttpException();
+@@ -50,8 +50,7 @@ class StudentController extends Controller
+     public function editAction(Request $request, Student $student)
+     {
+         $form = $this->createForm(StudentForm::class, $student);
+-        $data = json_decode($request->getContent(), true);
+-        $form->submit($data);
++        $this->submitForm($request, $form);
+ 
+         if (!$form->isValid()) {
+             throw new BadRequestHttpException();

@@ -1,0 +1,26 @@
+diff --git a/src/AppBundle/Controller/Api/ApiBaseController.php b/src/AppBundle/Controller/Api/ApiBaseController.php
+index bf3b17b..b6b697d 100644
+--- a/src/AppBundle/Controller/Api/ApiBaseController.php
++++ b/src/AppBundle/Controller/Api/ApiBaseController.php
+@@ -15,6 +15,6 @@ abstract class ApiBaseController extends Controller
+     protected function submitForm(Request $request, Form $form)
+     {
+         $data = json_decode($request->getContent(), true);
+-        $form->submit($data);
++        $form->submit($data, !$request->isMethod('PATCH'));
+     }
+ }
+\ No newline at end of file
+diff --git a/src/AppBundle/Controller/Api/StudentController.php b/src/AppBundle/Controller/Api/StudentController.php
+index 3521fe0..8dac3d6 100644
+--- a/src/AppBundle/Controller/Api/StudentController.php
++++ b/src/AppBundle/Controller/Api/StudentController.php
+@@ -45,7 +45,7 @@ class StudentController extends ApiBaseController
+ 
+     /**
+      * @Route("/api/students/{id}", name="api_student_edit")
+-     * @Method("PUT")
++     * @Method({"PUT", "PATCH"})
+      */
+     public function editAction(Request $request, Student $student)
+     {
