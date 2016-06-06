@@ -1,0 +1,33 @@
+diff --git a/tests/AppBundle/Controller/StudentControllerTest.php b/tests/AppBundle/Controller/StudentControllerTest.php
+index cbe85f4..e8c13d5 100644
+--- a/tests/AppBundle/Controller/StudentControllerTest.php
++++ b/tests/AppBundle/Controller/StudentControllerTest.php
+@@ -28,4 +28,28 @@ class StudentControllerTest extends ApiTestCase
+             'Ryan'
+         );
+     }
++
++    public function testPUTEditStudent()
++    {
++        
++
++        $data = [
++            'email' => 'weaverryan@gmail.com',
++            'firstName' => 'Ryan',
++            'lastName' => 'Weaver',
++        ];
++
++        $response = $this->client->post('/api/students', [
++            'body' => json_encode($data)
++        ]);
++
++        $this->assertEquals(201, $response->getStatusCode());
++        $this->asserter()
++            ->assertResponsePropertyExists($response, 'id');
++        $this->asserter()->assertResponsePropertyEquals(
++            $response,
++            'firstName',
++            'Ryan'
++        );
++    }
+ }
