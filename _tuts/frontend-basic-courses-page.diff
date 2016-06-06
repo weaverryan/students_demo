@@ -1,0 +1,53 @@
+diff --git a/app/Resources/views/course/list.html.twig b/app/Resources/views/course/list.html.twig
+new file mode 100644
+index 0000000..0e3c0bf
+--- /dev/null
++++ b/app/Resources/views/course/list.html.twig
+@@ -0,0 +1,18 @@
++{% extends 'base.html.twig' %}
++
++{% block body %}
++    <h1>Courses</h1>
++
++    <table class="table">
++        <tbody>
++            {% for course in courses %}
++                <tr>
++                    <td>{{ course.name }}</td>
++                    <td>
++                        <a href="#">Edit</a>
++                    </td>
++                </tr>
++            {% endfor %}
++        </tbody>
++    </table>
++{% endblock %}
+diff --git a/src/AppBundle/Controller/CourseController.php b/src/AppBundle/Controller/CourseController.php
+new file mode 100644
+index 0000000..6f43b28
+--- /dev/null
++++ b/src/AppBundle/Controller/CourseController.php
+@@ -0,0 +1,23 @@
++<?php
++
++namespace AppBundle\Controller;
++
++use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
++use Symfony\Bundle\FrameworkBundle\Controller\Controller;
++
++class CourseController extends Controller
++{
++    /**
++     * @Route("/courses", name="class_list")
++     */
++    public function listAction()
++    {
++        $courses = $this->getDoctrine()
++            ->getRepository('AppBundle:Course')
++            ->findAll();
++        
++        return $this->render('course/list.html.twig', [
++            'courses' => $courses,
++        ]);
++    }
++}
