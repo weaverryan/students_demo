@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class CourseController extends Controller
 {
     /**
-     * @Route("/courses", name="class_list")
+     * @Route("/courses", name="course_list")
      */
     public function listAction()
     {
