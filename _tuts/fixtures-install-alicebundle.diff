@@ -23,7 +23,7 @@ index 3292445..1db9a03 100644
 +    db_drivers:
 +        orm: ~
 diff --git a/composer.json b/composer.json
-index f1c21d2..0a7908b 100644
+index a449ef9..d34141a 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -32,7 +32,9 @@
@@ -38,7 +38,7 @@ index f1c21d2..0a7908b 100644
      "scripts": {
          "post-install-cmd": [
 diff --git a/composer.lock b/composer.lock
-index 46ed0a0..2997e96 100644
+index 99adf05..1567e6b 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,8 @@
@@ -47,12 +47,12 @@ index 46ed0a0..2997e96 100644
      ],
 -    "hash": "9aabad42f64be7b4adc0d6b134ce0041",
 -    "content-hash": "30ada9ec25267270df7ef5ca1dc82172",
-+    "hash": "27dc8d2d4e77ef511666023cf58a39cc",
-+    "content-hash": "f3a97f08f3e8a2af34d0fb85ddaaec07",
++    "hash": "32b2a7302edd80235b9494434ce5480f",
++    "content-hash": "0a9236828b1eec223ac8aeefe58a58b9",
      "packages": [
          {
              "name": "doctrine/annotations",
-@@ -2248,6 +2248,252 @@
+@@ -2197,6 +2197,252 @@
      ],
      "packages-dev": [
          {
@@ -302,6 +302,6 @@ index 46ed0a0..2997e96 100644
 +            "time": "2016-01-07 14:44:47"
 +        },
 +        {
-             "name": "sensio/generator-bundle",
-             "version": "v3.0.6",
+             "name": "psr/cache",
+             "version": "1.0.0",
              "source": {
