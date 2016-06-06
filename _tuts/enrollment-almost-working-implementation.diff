@@ -1,0 +1,75 @@
+diff --git a/src/AppBundle/Controller/Api/CourseController.php b/src/AppBundle/Controller/Api/CourseController.php
+index 8fb06e9..36f0da2 100644
+--- a/src/AppBundle/Controller/Api/CourseController.php
++++ b/src/AppBundle/Controller/Api/CourseController.php
+@@ -3,8 +3,11 @@
+ namespace AppBundle\Controller\Api;
+ 
+ use AppBundle\Entity\Course;
++use AppBundle\Entity\StudentEnrollment;
++use AppBundle\Form\StudentEnrollmentForm;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
++use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
+ 
+ class CourseController extends ApiBaseController
+@@ -13,8 +16,22 @@ class CourseController extends ApiBaseController
+      * @Route("/api/courses/{id}/students", name="api_course_student_add")
+      * @Method("POST")
+      */
+-    public function addStudentAction(Course $course)
++    public function addStudentAction(Course $course, Request $request)
+     {
+-        return new Response(null, 201);
++        $enrollment = new StudentEnrollment();
++        $enrollment->setCourse($course);
++
++        $form = $this->createForm(StudentEnrollmentForm::class, $enrollment);
++        $this->submitForm($request, $form);
++
++        if (!$form->isValid()) {
++            return $this->createFailedValidationResponse($form);
++        }
++
++        $em = $this->getDoctrine()->getManager();
++        $em->persist($enrollment);
++        $em->flush();
++
++        return $this->createApiResponse($enrollment, 201);
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/src/AppBundle/Form/StudentEnrollmentForm.php b/src/AppBundle/Form/StudentEnrollmentForm.php
+new file mode 100644
+index 0000000..6e4ed6e
+--- /dev/null
++++ b/src/AppBundle/Form/StudentEnrollmentForm.php
+@@ -0,0 +1,26 @@
++<?php
++
++namespace AppBundle\Form;
++
++use AppBundle\Entity\StudentEnrollment;
++use Symfony\Component\Form\AbstractType;
++use Symfony\Component\Form\FormBuilderInterface;
++use Symfony\Component\OptionsResolver\OptionsResolver;
++
++class StudentEnrollmentForm extends AbstractType
++{
++    public function buildForm(FormBuilderInterface $builder, array $options)
++    {
++        $builder
++            ->add('student')
++        ;
++    }
++
++    public function configureOptions(OptionsResolver $resolver)
++    {
++        $resolver->setDefaults([
++            'data_class' => StudentEnrollment::class,
++            'csrf_protection' => false,
++        ]);
++    }
++}
