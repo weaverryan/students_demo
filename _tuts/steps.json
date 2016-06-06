@@ -21,6 +21,11 @@
             "description": null
         },
         {
+            "id": "models-make-firstname-lastname-optional",
+            "name": "Models: Make firstName & lastName optional",
+            "description": null
+        },
+        {
             "id": "models-simple-studentenrollment",
             "name": "Models: Simple StudentEnrollment",
             "description": null
@@ -44,7 +49,62 @@
             "id": "frontend-basic-courses-page",
             "name": "Frontend: Basic \/courses page",
             "description": null
+        },
+        {
+            "id": "test-install-guzzle-phpunit",
+            "name": "Test: Install Guzzle & PhpUnit",
+            "description": null
+        },
+        {
+            "id": "test-initial-create-test",
+            "name": "Test: Initial create test",
+            "description": null
+        },
+        {
+            "id": "student-stubbed-create-endpoint",
+            "name": "Student: Stubbed create endpoint",
+            "description": null
+        },
+        {
+            "id": "student-create-and-use-form",
+            "name": "Student: Create and use form",
+            "description": null
+        },
+        {
+            "id": "student-remove-csrf-protection",
+            "name": "Student: Remove CSRF protection",
+            "description": null
+        },
+        {
+            "id": "test-add-apitestcase-responseasserter",
+            "name": "Test: Add ApiTestCase & ResponseAsserter",
+            "description": null
+        },
+        {
+            "id": "test-using-apitestcase",
+            "name": "Test: Using ApiTestCase",
+            "description": null
+        },
+        {
+            "id": "serializer-install-jms",
+            "name": "Serializer: Install JMS",
+            "description": null
+        },
+        {
+            "id": "serializer-using-it",
+            "name": "Serializer: Using it",
+            "description": null
+        },
+        {
+            "id": "serializer-fixing-naming-strategy",
+            "name": "Serializer: Fixing naming strategy",
+            "description": null
+        },
+        {
+            "id": "edit-add-put-test",
+            "name": "Edit: Add PUT Test",
+            "description": null
         }
     ],
-    "sha": "4d9a85c3a22b88d01747c95486d8afe5f9db5e59"
+    "sha": "a9c966057613b04d0dd55b2151d1d65c74040df7"
 }
