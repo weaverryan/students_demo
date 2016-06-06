@@ -1,0 +1,32 @@
+diff --git a/tests/AppBundle/Controller/StudentControllerTest.php b/tests/AppBundle/Controller/StudentControllerTest.php
+new file mode 100644
+index 0000000..f9197bc
+--- /dev/null
++++ b/tests/AppBundle/Controller/StudentControllerTest.php
+@@ -0,0 +1,26 @@
++<?php
++
++namespace Tests\AppBundle\Controller;
++
++use GuzzleHttp\Client;
++
++class StudentControllerTest extends \PHPUnit_Framework_TestCase
++{
++    public function testPOSTCreateStudent()
++    {
++        $data = [
++            'email' => 'weaverryan@gmail.com',
++            'firstName' => 'Ryan',
++            'lastName' => 'Weaver',
++        ];
++
++        $client = new Client(['base_uri' => 'http://localhost:9007']);
++        $response = $client->post('/api/students', [
++            'body' => json_encode($data)
++        ]);
++
++        $this->assertEquals(201, $response->getStatusCode());
++        $responseBody = json_decode($response->getBody(), true);
++        $this->assertArrayHasKey('id', $responseBody);
++    }
++}

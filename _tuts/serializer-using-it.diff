@@ -1,0 +1,40 @@
+diff --git a/src/AppBundle/Controller/Api/StudentController.php b/src/AppBundle/Controller/Api/StudentController.php
+index 2d6014d..84c0816 100644
+--- a/src/AppBundle/Controller/Api/StudentController.php
++++ b/src/AppBundle/Controller/Api/StudentController.php
+@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+ use Symfony\Component\HttpFoundation\JsonResponse;
+ use Symfony\Component\HttpFoundation\Request;
++use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+ 
+ class StudentController extends Controller
+@@ -34,6 +35,11 @@ class StudentController extends Controller
+         $em->persist($student);
+         $em->flush();
+ 
+-        return new JsonResponse(['id' => $student->getId()], 201);
++        $json = $this->container->get('jms_serializer')
++            ->serialize($student, 'json');
++
++        return new Response($json, 201, [
++            'Content-Type' => 'application/json'
++        ]);
+     }
+ }
+diff --git a/tests/AppBundle/Controller/StudentControllerTest.php b/tests/AppBundle/Controller/StudentControllerTest.php
+index 7e207b4..cbe85f4 100644
+--- a/tests/AppBundle/Controller/StudentControllerTest.php
++++ b/tests/AppBundle/Controller/StudentControllerTest.php
+@@ -22,5 +22,10 @@ class StudentControllerTest extends ApiTestCase
+         $this->assertEquals(201, $response->getStatusCode());
+         $this->asserter()
+             ->assertResponsePropertyExists($response, 'id');
++        $this->asserter()->assertResponsePropertyEquals(
++            $response,
++            'firstName',
++            'Ryan'
++        );
+     }
+ }
