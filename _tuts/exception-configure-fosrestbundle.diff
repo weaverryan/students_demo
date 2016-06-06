@@ -1,12 +1,11 @@
 diff --git a/app/config/config.yml b/app/config/config.yml
-index 7a96f7e..558ec9f 100644
+index 60f1a03..b0b4271 100644
 --- a/app/config/config.yml
 +++ b/app/config/config.yml
-@@ -75,3 +75,11 @@ jms_serializer:
-     property_naming:
-         separator: ''
-         lower_case: true
-+
+@@ -71,3 +71,10 @@ hautelook_alice:
+     db_drivers:
+         orm: ~
+ 
 +fos_rest:
 +    exception:
 +        enabled: true
