@@ -1,0 +1,64 @@
+diff --git a/src/AppBundle/Controller/Api/ApiBaseController.php b/src/AppBundle/Controller/Api/ApiBaseController.php
+index b6b697d..e520954 100644
+--- a/src/AppBundle/Controller/Api/ApiBaseController.php
++++ b/src/AppBundle/Controller/Api/ApiBaseController.php
+@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Api;
+ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+ use Symfony\Component\Form\Form;
+ use Symfony\Component\HttpFoundation\Request;
++use Symfony\Component\HttpFoundation\Response;
+ 
+ abstract class ApiBaseController extends Controller
+ {
+@@ -17,4 +18,19 @@ abstract class ApiBaseController extends Controller
+         $data = json_decode($request->getContent(), true);
+         $form->submit($data, !$request->isMethod('PATCH'));
+     }
++
++    /**
++     * @param $data
++     * @param integer $statusCode
++     * @return Response
++     */
++    protected function createApiResponse($data, $statusCode = 200)
++    {
++        $json = $this->container->get('jms_serializer')
++            ->serialize($data, 'json');
++
++        return new Response($json, $statusCode, [
++            'Content-Type' => 'application/json'
++        ]);
++    }
+ }
+\ No newline at end of file
+diff --git a/src/AppBundle/Controller/Api/StudentController.php b/src/AppBundle/Controller/Api/StudentController.php
+index 8dac3d6..0482e59 100644
+--- a/src/AppBundle/Controller/Api/StudentController.php
++++ b/src/AppBundle/Controller/Api/StudentController.php
+@@ -35,12 +35,7 @@ class StudentController extends ApiBaseController
+         $em->persist($student);
+         $em->flush();
+ 
+-        $json = $this->container->get('jms_serializer')
+-            ->serialize($student, 'json');
+-
+-        return new Response($json, 201, [
+-            'Content-Type' => 'application/json'
+-        ]);
++        return $this->createApiResponse($student, 201);
+     }
+ 
+     /**
+@@ -60,11 +55,6 @@ class StudentController extends ApiBaseController
+         $em->persist($student);
+         $em->flush();
+ 
+-        $json = $this->container->get('jms_serializer')
+-            ->serialize($student, 'json');
+-
+-        return new Response($json, 200, [
+-            'Content-Type' => 'application/json'
+-        ]);
++        return $this->createApiResponse($student);
+     }
+ }
