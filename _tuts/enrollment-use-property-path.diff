@@ -1,0 +1,26 @@
+diff --git a/src/AppBundle/Form/StudentEnrollmentForm.php b/src/AppBundle/Form/StudentEnrollmentForm.php
+index 6e4ed6e..a850fd6 100644
+--- a/src/AppBundle/Form/StudentEnrollmentForm.php
++++ b/src/AppBundle/Form/StudentEnrollmentForm.php
+@@ -2,7 +2,9 @@
+ 
+ namespace AppBundle\Form;
+ 
++use AppBundle\Entity\Student;
+ use AppBundle\Entity\StudentEnrollment;
++use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+ use Symfony\Component\Form\AbstractType;
+ use Symfony\Component\Form\FormBuilderInterface;
+ use Symfony\Component\OptionsResolver\OptionsResolver;
+@@ -12,7 +14,10 @@ class StudentEnrollmentForm extends AbstractType
+     public function buildForm(FormBuilderInterface $builder, array $options)
+     {
+         $builder
+-            ->add('student')
++            ->add('studentId', EntityType::class, [
++                'property_path' => 'student',
++                'class' => Student::class
++            ])
+         ;
+     }
+ 
