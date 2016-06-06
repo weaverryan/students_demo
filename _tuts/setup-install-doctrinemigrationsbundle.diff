@@ -18,7 +18,7 @@ index 3789b32..4678d02 100644
  
          if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
 diff --git a/composer.json b/composer.json
-index f6f50c4..f1c21d2 100644
+index 6d7f203..a449ef9 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -27,7 +27,8 @@
@@ -32,15 +32,15 @@ index f6f50c4..f1c21d2 100644
      "require-dev": {
          "sensio/generator-bundle": "^3.0",
 diff --git a/composer.lock b/composer.lock
-index 49b0176..46ed0a0 100644
+index bacb5fc..99adf05 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,8 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
          "This file is @generated automatically"
      ],
--    "hash": "b8c976b9ae1de9457b1da117d4e56406",
--    "content-hash": "7d6632abc04aec47c3e177c01a8d6b2b",
+-    "hash": "65fc6e3832cc6c11b1490dac793d092c",
+-    "content-hash": "34f6530172acc7d26809be9762bbf858",
 +    "hash": "9aabad42f64be7b4adc0d6b134ce0041",
 +    "content-hash": "30ada9ec25267270df7ef5ca1dc82172",
      "packages": [
@@ -261,7 +261,7 @@ index 49b0176..46ed0a0 100644
              "name": "paragonie/random_compat",
              "version": "v2.0.2",
              "source": {
-@@ -1944,6 +2138,112 @@
+@@ -1893,6 +2087,112 @@
                  "templating"
              ],
              "time": "2016-01-25 21:22:18"
@@ -374,13 +374,3 @@ index 49b0176..46ed0a0 100644
          }
      ],
      "packages-dev": [
-@@ -2063,8 +2363,5 @@
-     "platform": {
-         "php": ">=5.5.9"
-     },
--    "platform-dev": [],
--    "platform-overrides": {
--        "php": "5.5.9"
--    }
-+    "platform-dev": []
- }
