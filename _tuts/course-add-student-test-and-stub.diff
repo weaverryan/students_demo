@@ -1,0 +1,90 @@
+diff --git a/src/AppBundle/Controller/Api/CourseController.php b/src/AppBundle/Controller/Api/CourseController.php
+new file mode 100644
+index 0000000..8fb06e9
+--- /dev/null
++++ b/src/AppBundle/Controller/Api/CourseController.php
+@@ -0,0 +1,20 @@
++<?php
++
++namespace AppBundle\Controller\Api;
++
++use AppBundle\Entity\Course;
++use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
++use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
++use Symfony\Component\HttpFoundation\Response;
++
++class CourseController extends ApiBaseController
++{
++    /**
++     * @Route("/api/courses/{id}/students", name="api_course_student_add")
++     * @Method("POST")
++     */
++    public function addStudentAction(Course $course)
++    {
++        return new Response(null, 201);
++    }
++}
+\ No newline at end of file
+diff --git a/src/AppBundle/Test/DataHelperTrait.php b/src/AppBundle/Test/DataHelperTrait.php
+index 01c6d41..b55d488 100644
+--- a/src/AppBundle/Test/DataHelperTrait.php
++++ b/src/AppBundle/Test/DataHelperTrait.php
+@@ -2,6 +2,7 @@
+ 
+ namespace AppBundle\Test;
+ 
++use AppBundle\Entity\Course;
+ use AppBundle\Entity\Student;
+ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+ use Doctrine\ORM\EntityManager;
+@@ -34,6 +35,16 @@ trait DataHelperTrait
+         return $student;
+     }
+ 
++    protected function createCourse($name)
++    {
++        $course = new Course();
++        $course->setName($name);
++        $this->getEntityManager()->persist($course);
++        $this->getEntityManager()->flush();
++
++        return $course;
++    }
++
+     private function purgeDatabase()
+     {
+         $purger = new ORMPurger($this->getEntityManager());
+diff --git a/tests/AppBundle/Controller/CourseControllerTest.php b/tests/AppBundle/Controller/CourseControllerTest.php
+new file mode 100644
+index 0000000..f62113a
+--- /dev/null
++++ b/tests/AppBundle/Controller/CourseControllerTest.php
+@@ -0,0 +1,28 @@
++<?php
++
++namespace Tests\AppBundle\Controller;
++
++use AppBundle\Test\ApiTestCase;
++
++class CourseControllerTest extends ApiTestCase
++{
++    public function testAddStudentToCourse()
++    {
++        $student = $this->createStudent('weaverryan@gmail.com', 'Ryan');
++        $course = $this->createCourse('some course');
++
++        $data = [
++            'studentId' => $student->getId()
++        ];
++
++        $response = $this->client->post(sprintf('/api/courses/%s/students', $course->getId()), [
++            'body' => json_encode($data)
++        ]);
++
++        $this->assertEquals(201, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyExists(
++            $response,
++            'id' // id of the enrollment
++        );
++    }
++}
