@@ -1,32 +1,29 @@
 diff --git a/tests/AppBundle/Controller/StudentControllerTest.php b/tests/AppBundle/Controller/StudentControllerTest.php
-index cbe85f4..38f8375 100644
+index 0658a2d..e4b3d82 100644
 --- a/tests/AppBundle/Controller/StudentControllerTest.php
 +++ b/tests/AppBundle/Controller/StudentControllerTest.php
-@@ -28,4 +28,27 @@ class StudentControllerTest extends ApiTestCase
-             'Ryan'
+@@ -76,4 +76,24 @@ class StudentControllerTest extends ApiTestCase
+             'Ryan2'
          );
      }
 +
-+    public function testPUTEditStudent()
++    public function testFailValidation()
 +    {
 +        $student = $this->createStudent('weaverryan@gmail.com', 'Ryan');
 +
 +        $data = [
 +            'email' => 'weaverryan@gmail.com',
-+            'firstName' => 'Ryan2',
 +        ];
 +
-+        $response = $this->client->put(sprintf('/api/students/%s', $student->getId()), [
++        $response = $this->client->post(sprintf('/api/students', $student->getId()), [
 +            'body' => json_encode($data)
 +        ]);
 +
-+        $this->assertEquals(200, $response->getStatusCode());
-+        $this->asserter()
-+            ->assertResponsePropertyEquals($response, 'id', $student->getId());
++        $this->assertEquals(400, $response->getStatusCode());
 +        $this->asserter()->assertResponsePropertyEquals(
 +            $response,
-+            'firstName',
-+            'Ryan2'
++            'errors.email[0]',
++            'This email is already taken'
 +        );
 +    }
  }
