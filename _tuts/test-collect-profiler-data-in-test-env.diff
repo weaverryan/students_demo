@@ -1,0 +1,13 @@
+diff --git a/app/config/config_test.yml b/app/config/config_test.yml
+index 2f6d925..0b50f30 100644
+--- a/app/config/config_test.yml
++++ b/app/config/config_test.yml
+@@ -6,7 +6,7 @@ framework:
+     session:
+         storage_id: session.storage.mock_file
+     profiler:
+-        collect: false
++        collect: true
+ 
+ web_profiler:
+     toolbar: false
