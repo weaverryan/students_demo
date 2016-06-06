@@ -6,6 +6,11 @@
             "description": null
         },
         {
+            "id": "styling-add-bootstrap",
+            "name": "Styling: Add Bootstrap",
+            "description": null
+        },
+        {
             "id": "setup-install-doctrinemigrationsbundle",
             "name": "Setup: Install DoctrineMigrationsBundle",
             "description": null
@@ -34,7 +39,12 @@
             "id": "fixtures-add-fixtures",
             "name": "Fixtures: Add Fixtures",
             "description": null
+        },
+        {
+            "id": "frontend-basic-courses-page",
+            "name": "Frontend: Basic \/courses page",
+            "description": null
         }
     ],
-    "sha": "789f690f1acd76ccd17af6b24104d79cca7bac9d"
+    "sha": "4d9a85c3a22b88d01747c95486d8afe5f9db5e59"
 }
