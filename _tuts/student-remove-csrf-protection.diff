@@ -1,0 +1,14 @@
+diff --git a/src/AppBundle/Form/StudentForm.php b/src/AppBundle/Form/StudentForm.php
+index 593ed0d..012454c 100644
+--- a/src/AppBundle/Form/StudentForm.php
++++ b/src/AppBundle/Form/StudentForm.php
+@@ -21,7 +21,8 @@ class StudentForm extends AbstractType
+     public function configureOptions(OptionsResolver $resolver)
+     {
+         $resolver->setDefaults([
+-            'data_class' => Student::class
++            'data_class' => Student::class,
++            'csrf_protection' => false,
+         ]);
+     }
+ }
