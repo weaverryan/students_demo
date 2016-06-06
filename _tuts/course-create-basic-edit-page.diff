@@ -1,0 +1,53 @@
+diff --git a/app/Resources/views/course/edit.html.twig b/app/Resources/views/course/edit.html.twig
+new file mode 100644
+index 0000000..56323fd
+--- /dev/null
++++ b/app/Resources/views/course/edit.html.twig
+@@ -0,0 +1,7 @@
++{% extends 'base.html.twig' %}
++
++{% block body %}
++    <h1>Edit Course</h1>
++
++
++{% endblock %}
+diff --git a/app/Resources/views/course/list.html.twig b/app/Resources/views/course/list.html.twig
+index 0e3c0bf..1373e40 100644
+--- a/app/Resources/views/course/list.html.twig
++++ b/app/Resources/views/course/list.html.twig
+@@ -9,7 +9,7 @@
+                 <tr>
+                     <td>{{ course.name }}</td>
+                     <td>
+-                        <a href="#">Edit</a>
++                        <a href="{{ path('course_edit', {'id': course.id}) }}">Edit</a>
+                     </td>
+                 </tr>
+             {% endfor %}
+diff --git a/src/AppBundle/Controller/CourseController.php b/src/AppBundle/Controller/CourseController.php
+index e8bed35..4eb5580 100644
+--- a/src/AppBundle/Controller/CourseController.php
++++ b/src/AppBundle/Controller/CourseController.php
+@@ -2,6 +2,7 @@
+ 
+ namespace AppBundle\Controller;
+ 
++use AppBundle\Entity\Course;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+ 
+@@ -20,4 +21,14 @@ class CourseController extends Controller
+             'courses' => $courses,
+         ]);
+     }
++
++    /**
++     * @Route("/courses/{id}", name="course_edit")
++     */
++    public function editAction(Course $course)
++    {
++        return $this->render('course/edit.html.twig', [
++            'course' => $course
++        ]);
++    }
+ }
