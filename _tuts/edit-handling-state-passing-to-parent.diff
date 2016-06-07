@@ -1,0 +1,76 @@
+diff --git a/assets/js/course/Components/StudentEditForm.react.js b/assets/js/course/Components/StudentEditForm.react.js
+index 0845a8e..e17ba67 100644
+--- a/assets/js/course/Components/StudentEditForm.react.js
++++ b/assets/js/course/Components/StudentEditForm.react.js
+@@ -1,10 +1,14 @@
+ var React = require('react');
+ 
+ var StudentEditForm = React.createClass({
++    handleFieldChange: function(e) {
++        this.props.onUpdateEnrollmentField(e.target.name, e.target.value);
++    },
++
+     render: function () {
+         return (
+             <div>
+-                Edit student
++                <input type="text" name="email" value={this.props.enrollment.email} onChange={this.handleFieldChange} />
+             </div>
+         )
+     }
+diff --git a/assets/js/course/Components/StudentRow.react.js b/assets/js/course/Components/StudentRow.react.js
+index 621a9e8..f6cbaf7 100644
+--- a/assets/js/course/Components/StudentRow.react.js
++++ b/assets/js/course/Components/StudentRow.react.js
+@@ -5,7 +5,8 @@ var StudentRow = React.createClass({
+     getInitialState: function() {
+         return {
+             isProcessing: false,
+-            inEditMode: false
++            inEditMode: false,
++            enrollment: this.props.enrollment
+         }
+     },
+ 
+@@ -26,8 +27,17 @@ var StudentRow = React.createClass({
+         });
+     },
+ 
++    updateEnrollmentField: function(key, value) {
++        var enrollment = this.state.enrollment;
++        enrollment[key] = value;
++
++        this.setState({
++            enrollment: enrollment
++        });
++    },
++
+     getFullName: function() {
+-        return this.props.enrollment.firstName+' '+this.props.enrollment.lastName
++        return this.state.enrollment.firstName+' '+this.state.enrollment.lastName
+     },
+ 
+     render: function () {
+@@ -49,16 +59,19 @@ var StudentRow = React.createClass({
+         if (this.state.inEditMode) {
+             editWidget = (
+                 <td style={{'width': '50%'}}>
+-                    <StudentEditForm />
++                    <StudentEditForm
++                        enrollment={this.state.enrollment}
++                        onUpdateEnrollmentField={this.updateEnrollmentField}
++                    />
+                 </td>
+             );
+         }
+ 
+         return (
+             <tr>
+-                <td>{this.props.enrollment.email}</td>
++                <td>{this.state.enrollment.email}</td>
+                 <td>{this.getFullName()}</td>
+-                <td>{this.props.enrollment.enrolledAt}</td>
++                <td>{this.state.enrollment.enrolledAt}</td>
+                 <td>
+                     {buttons}
+                 </td>

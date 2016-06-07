@@ -12,10 +12,10 @@ index 205719f..0fa00e7 100644
        );
    }
 diff --git a/assets/js/course/Components/StudentList.react.js b/assets/js/course/Components/StudentList.react.js
-index e2b1071..aa01f86 100644
+index b6e5524..b6c072d 100644
 --- a/assets/js/course/Components/StudentList.react.js
 +++ b/assets/js/course/Components/StudentList.react.js
-@@ -1,11 +1,23 @@
+@@ -1,7 +1,17 @@
  var React = require('react');
 +var StudentRow = require('./StudentRow.react');
  
@@ -31,17 +31,18 @@ index e2b1071..aa01f86 100644
 +        });
 +
          return (
--            <ul>
--                <li>Test!</li>
--            </ul>
-+            <table className="table">
+             <table className="table">
+                 <thead>
+@@ -11,6 +21,9 @@ var StudentList = React.createClass({
+                         <th>&nbsp;</th>
+                     </tr>
+                 </thead>
 +                <tbody>
 +                    {rows}
 +                </tbody>
-+            </table>
+             </table>
          );
      }
- });
 diff --git a/assets/js/course/Components/StudentRow.react.js b/assets/js/course/Components/StudentRow.react.js
 new file mode 100644
 index 0000000..b1f3d85

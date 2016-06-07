@@ -1,0 +1,84 @@
+diff --git a/assets/js/course/Components/StudentEditForm.react.js b/assets/js/course/Components/StudentEditForm.react.js
+new file mode 100644
+index 0000000..0845a8e
+--- /dev/null
++++ b/assets/js/course/Components/StudentEditForm.react.js
+@@ -0,0 +1,13 @@
++var React = require('react');
++
++var StudentEditForm = React.createClass({
++    render: function () {
++        return (
++            <div>
++                Edit student
++            </div>
++        )
++    }
++});
++
++module.exports = StudentEditForm;
+diff --git a/assets/js/course/Components/StudentRow.react.js b/assets/js/course/Components/StudentRow.react.js
+index 64e9681..621a9e8 100644
+--- a/assets/js/course/Components/StudentRow.react.js
++++ b/assets/js/course/Components/StudentRow.react.js
+@@ -1,9 +1,11 @@
+ var React = require('react');
++var StudentEditForm = require('./StudentEditForm.react');
+ 
+ var StudentRow = React.createClass({
+     getInitialState: function() {
+         return {
+-            isProcessing: false
++            isProcessing: false,
++            inEditMode: false
+         }
+     },
+ 
+@@ -16,6 +18,14 @@ var StudentRow = React.createClass({
+         this.props.onRemoveStudent();
+     },
+ 
++    handleEditClick: function(e) {
++        e.preventDefault();
++
++        this.setState({
++            inEditMode: true
++        });
++    },
++
+     getFullName: function() {
+         return this.props.enrollment.firstName+' '+this.props.enrollment.lastName
+     },
+@@ -24,6 +34,8 @@ var StudentRow = React.createClass({
+         var buttons = (
+             <div>
+                 <a href="#" onClick={this.handleDeleteClick}>X</a>
++                &nbsp;
++                <a href="#" onClick={this.handleEditClick}>Edit</a>
+             </div>
+         );
+ 
+@@ -33,6 +45,15 @@ var StudentRow = React.createClass({
+             )
+         }
+ 
++        var editWidget;
++        if (this.state.inEditMode) {
++            editWidget = (
++                <td style={{'width': '50%'}}>
++                    <StudentEditForm />
++                </td>
++            );
++        }
++
+         return (
+             <tr>
+                 <td>{this.props.enrollment.email}</td>
+@@ -41,6 +62,7 @@ var StudentRow = React.createClass({
+                 <td>
+                     {buttons}
+                 </td>
++                {editWidget}
+             </tr>
+         )
+     }

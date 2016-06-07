@@ -261,6 +261,11 @@
             "description": null
         },
         {
+            "id": "javascript-use-es2015-class",
+            "name": "JavaScript: Use es2015 class",
+            "description": null
+        },
+        {
             "id": "javascript-init-npm",
             "name": "JavaScript: init npm",
             "description": null
@@ -278,6 +283,11 @@
         {
             "id": "babel-add-loader",
             "name": "Babel: Add Loader",
+            "description": null
+        },
+        {
+            "id": "babel-use-es2015-class-for-real",
+            "name": "Babel: Use es2015 class (for real)",
             "description": null
         },
         {
@@ -379,7 +389,17 @@
             "id": "hateoas-install-and-use-bundle",
             "name": "HATEOAS: Install and use bundle",
             "description": null
+        },
+        {
+            "id": "edit-basic-studenteditform-component",
+            "name": "Edit: Basic StudentEditForm component",
+            "description": null
+        },
+        {
+            "id": "edit-handling-state-passing-to-parent",
+            "name": "Edit: Handling state, passing to parent",
+            "description": null
         }
     ],
-    "sha": "80e50e59cda7cbfa1ccd401506718d607fc4ab93"
+    "sha": "bcf4fa95d0cd60e59fcbc71e8eca0c216d0c7b56"
 }

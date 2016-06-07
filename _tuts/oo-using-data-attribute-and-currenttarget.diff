@@ -1,13 +1,14 @@
 diff --git a/app/Resources/views/course/edit.html.twig b/app/Resources/views/course/edit.html.twig
-index 3401fe3..3ac2770 100644
+index 3401fe3..e069129 100644
 --- a/app/Resources/views/course/edit.html.twig
 +++ b/app/Resources/views/course/edit.html.twig
-@@ -10,6 +10,6 @@
+@@ -10,6 +10,7 @@
      <h1>Edit Course</h1>
  
      <div id="course_edit">
 -        <button class="btn btn-primary js-alert">Alert</button>
-+        <button class="btn btn-primary js-alert" data-message="Yay">Alert</button>
++        <button class="btn btn-primary js-alert" data-message="Yay">The yay button</button>
++        <button class="btn btn-primary js-alert" data-message="Boo">The boo button</button>
      </div>
  {% endblock %}
 diff --git a/assets/js/course/alerter.js b/assets/js/course/alerter.js

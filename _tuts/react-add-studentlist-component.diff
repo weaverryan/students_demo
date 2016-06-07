@@ -17,18 +17,24 @@ index c26de77..205719f 100644
    }
 diff --git a/assets/js/course/Components/StudentList.react.js b/assets/js/course/Components/StudentList.react.js
 new file mode 100644
-index 0000000..e2b1071
+index 0000000..b6e5524
 --- /dev/null
 +++ b/assets/js/course/Components/StudentList.react.js
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,19 @@
 +var React = require('react');
 +
 +var StudentList = React.createClass({
 +    render: function () {
 +        return (
-+            <ul>
-+                <li>Test!</li>
-+            </ul>
++            <table className="table">
++                <thead>
++                    <tr>
++                        <th>Email</th>
++                        <th>Name</th>
++                        <th>&nbsp;</th>
++                    </tr>
++                </thead>
++            </table>
 +        );
 +    }
 +});

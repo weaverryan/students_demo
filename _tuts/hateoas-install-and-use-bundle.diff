@@ -12,7 +12,7 @@ index 4630504..69a6e19 100644
  
          if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
 diff --git a/assets/js/course/Components/StudentList.react.js b/assets/js/course/Components/StudentList.react.js
-index d0a2c65..d5a3863 100644
+index d7c8cee..3587965 100644
 --- a/assets/js/course/Components/StudentList.react.js
 +++ b/assets/js/course/Components/StudentList.react.js
 @@ -19,7 +19,7 @@ var StudentList = React.createClass({

@@ -1,5 +1,5 @@
 diff --git a/assets/js/course/Components/StudentList.react.js b/assets/js/course/Components/StudentList.react.js
-index aadd10a..d0a2c65 100644
+index bb561a4..d7c8cee 100644
 --- a/assets/js/course/Components/StudentList.react.js
 +++ b/assets/js/course/Components/StudentList.react.js
 @@ -18,10 +18,18 @@ var StudentList = React.createClass({
@@ -7,9 +7,6 @@ index aadd10a..d0a2c65 100644
          });
  
 -        enrollments.splice(matchedKey, 1);
--
--        this.setState({
--            'enrollments': enrollments
 +        var self = this;
 +        var url = enrollments[matchedKey].url;
 +        $.ajax({
@@ -17,7 +14,9 @@ index aadd10a..d0a2c65 100644
 +            method: 'DELETE',
 +            'success': function() {
 +                enrollments.splice(matchedKey, 1);
-+
+ 
+-        this.setState({
+-            'enrollments': enrollments
 +                self.setState({
 +                    'enrollments': enrollments
 +                });
