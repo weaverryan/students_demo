@@ -1,0 +1,28 @@
+diff --git a/package.json b/package.json
+new file mode 100644
+index 0000000..1f34a59
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,22 @@
++{
++  "name": "icoe_student_app",
++  "version": "1.0.0",
++  "description": "icoe_student_app ================",
++  "main": "index.js",
++  "directories": {
++    "test": "tests"
++  },
++  "scripts": {
++    "test": "echo \"Error: no test specified\" && exit 1"
++  },
++  "repository": {
++    "type": "git",
++    "url": "git+https://github.com/weaverryan/students_demo.git"
++  },
++  "author": "",
++  "license": "ISC",
++  "bugs": {
++    "url": "https://github.com/weaverryan/students_demo/issues"
++  },
++  "homepage": "https://github.com/weaverryan/students_demo#readme"
++}

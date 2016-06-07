@@ -1,0 +1,22 @@
+diff --git a/assets/webpack.config.js b/assets/webpack.config.js
+index c692040..c20a32e 100644
+--- a/assets/webpack.config.js
++++ b/assets/webpack.config.js
+@@ -6,5 +6,17 @@ module.exports = {
+         path: path.resolve(__dirname, '../web/js'),
+         filename: 'course.js',
+         publicPath: '/js/'
++    },
++    module: {
++        loaders: [
++            {
++                test: /\.js?$/,
++                exclude: /node_modules/,
++                loader: "babel-loader",
++                query: {
++                    presets: ['es2015']
++                }
++            }
++        ]
+     }
+ }

@@ -1,0 +1,77 @@
+diff --git a/assets/js/course/Components/StudentRow.react.js b/assets/js/course/Components/StudentRow.react.js
+index 32d0fa0..64e9681 100644
+--- a/assets/js/course/Components/StudentRow.react.js
++++ b/assets/js/course/Components/StudentRow.react.js
+@@ -1,9 +1,18 @@
+ var React = require('react');
+ 
+ var StudentRow = React.createClass({
++    getInitialState: function() {
++        return {
++            isProcessing: false
++        }
++    },
++
+     handleDeleteClick: function(e) {
+         e.preventDefault();
+ 
++        this.setState({
++            isProcessing: true
++        });
+         this.props.onRemoveStudent();
+     },
+ 
+@@ -12,13 +21,25 @@ var StudentRow = React.createClass({
+     },
+ 
+     render: function () {
++        var buttons = (
++            <div>
++                <a href="#" onClick={this.handleDeleteClick}>X</a>
++            </div>
++        );
++
++        if (this.state.isProcessing) {
++            buttons = (
++                <span className="fa fa-spinner fa-spin"></span>
++            )
++        }
++
+         return (
+             <tr>
+                 <td>{this.props.enrollment.email}</td>
+                 <td>{this.getFullName()}</td>
+                 <td>{this.props.enrollment.enrolledAt}</td>
+                 <td>
+-                    <a href="#" onClick={this.handleDeleteClick}>X</a>
++                    {buttons}
+                 </td>
+             </tr>
+         )
+diff --git a/assets/webpack.config.js b/assets/webpack.config.js
+index f091bae..179fafa 100644
+--- a/assets/webpack.config.js
++++ b/assets/webpack.config.js
+@@ -19,5 +19,8 @@ module.exports = {
+             }
+         ]
+     },
+-    devtool: "#inline-source-map"
++    devtool: "#inline-source-map",
++    devServer: {
++        headers: { "Access-Control-Allow-Origin": "*" }
++    }
+ }
+diff --git a/src/AppBundle/Controller/Api/EnrollmentController.php b/src/AppBundle/Controller/Api/EnrollmentController.php
+index 44bd262..4a9cfc2 100644
+--- a/src/AppBundle/Controller/Api/EnrollmentController.php
++++ b/src/AppBundle/Controller/Api/EnrollmentController.php
+@@ -17,6 +17,8 @@ class EnrollmentController extends ApiBaseController
+         $em->remove($enrollment);
+         $em->flush();
+ 
++        sleep(1);
++
+         return new Response(null, 204);
+     }
+ }

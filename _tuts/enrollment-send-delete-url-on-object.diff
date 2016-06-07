@@ -1,0 +1,73 @@
+diff --git a/assets/js/course/Components/StudentList.react.js b/assets/js/course/Components/StudentList.react.js
+index aadd10a..d0a2c65 100644
+--- a/assets/js/course/Components/StudentList.react.js
++++ b/assets/js/course/Components/StudentList.react.js
+@@ -18,10 +18,18 @@ var StudentList = React.createClass({
+             }
+         });
+ 
+-        enrollments.splice(matchedKey, 1);
+-
+-        this.setState({
+-            'enrollments': enrollments
++        var self = this;
++        var url = enrollments[matchedKey].url;
++        $.ajax({
++            url: url,
++            method: 'DELETE',
++            'success': function() {
++                enrollments.splice(matchedKey, 1);
++
++                self.setState({
++                    'enrollments': enrollments
++                });
++            }
+         });
+     },
+ 
+diff --git a/src/AppBundle/Api/Model/StudentEnrollmentDetails.php b/src/AppBundle/Api/Model/StudentEnrollmentDetails.php
+index 293e493..3f25dc8 100644
+--- a/src/AppBundle/Api/Model/StudentEnrollmentDetails.php
++++ b/src/AppBundle/Api/Model/StudentEnrollmentDetails.php
+@@ -14,13 +14,16 @@ class StudentEnrollmentDetails
+ 
+     private $enrolledAt;
+ 
+-    public function __construct($id, $email, $firstName, $lastName, \DateTime $enrolledAt)
++    private $url;
++
++    public function __construct($id, $email, $firstName, $lastName, \DateTime $enrolledAt, $url)
+     {
+         $this->id = $id;
+         $this->email = $email;
+         $this->firstName = $firstName;
+         $this->lastName = $lastName;
+         $this->enrolledAt = $enrolledAt;
++        $this->url = $url;
+     }
+ 
+     public function getId()
+@@ -47,4 +50,9 @@ class StudentEnrollmentDetails
+     {
+         return $this->enrolledAt;
+     }
++
++    public function getUrl()
++    {
++        return $this->url;
++    }
+ }
+diff --git a/src/AppBundle/Controller/CourseController.php b/src/AppBundle/Controller/CourseController.php
+index 4f803f1..f94c55f 100644
+--- a/src/AppBundle/Controller/CourseController.php
++++ b/src/AppBundle/Controller/CourseController.php
+@@ -36,7 +36,8 @@ class CourseController extends Controller
+                 $studentEnrollment->getStudent()->getEmail(),
+                 $studentEnrollment->getStudent()->getFirstName(),
+                 $studentEnrollment->getStudent()->getLastName(),
+-                $studentEnrollment->getEnrolledAt()
++                $studentEnrollment->getEnrolledAt(),
++                $this->generateUrl('api_enrollment_delete', ['id' => $studentEnrollment->getId()])
+             );
+         }
+ 

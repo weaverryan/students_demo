@@ -1,0 +1,37 @@
+diff --git a/assets/js/course/alerter.js b/assets/js/course/alerter.js
+index 56d9eae..d193f09 100644
+--- a/assets/js/course/alerter.js
++++ b/assets/js/course/alerter.js
+@@ -1,8 +1,10 @@
+ 
+ 
+ var alerter = {
+-    initialize: function() {
+-        $('#course_edit').on('click', '.js-alert', $.proxy(this._handleSendAlertClick, this));
++    initialize: function($wrapper) {
++        this.$wrapper = $wrapper;
++
++        this.$wrapper.on('click', '.js-alert', $.proxy(this._handleSendAlertClick, this));
+     },
+ 
+     _handleSendAlertClick: function(e) {
+@@ -13,7 +15,7 @@ var alerter = {
+         var newLink = $(e.currentTarget).clone();
+         newLink.data('message', 'Other');
+         newLink.html('Other clicky');
+-        $('#course_edit').append(newLink);
++        this.$wrapper.append(newLink);
+ 
+         this.sendAlert(message);
+     },
+diff --git a/assets/js/course/app.js b/assets/js/course/app.js
+index c1e49d7..7eb6d6e 100644
+--- a/assets/js/course/app.js
++++ b/assets/js/course/app.js
+@@ -1,5 +1,5 @@
+ var alerter = require('./alerter');
+ 
+ jQuery(document).ready(function() {
+-    alerter.initialize();
++    alerter.initialize($('#course_edit'));
+ });

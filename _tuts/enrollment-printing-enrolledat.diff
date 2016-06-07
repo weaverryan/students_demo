@@ -1,0 +1,29 @@
+diff --git a/assets/js/course/Components/StudentRow.react.js b/assets/js/course/Components/StudentRow.react.js
+index 20299e8..32d0fa0 100644
+--- a/assets/js/course/Components/StudentRow.react.js
++++ b/assets/js/course/Components/StudentRow.react.js
+@@ -16,6 +16,7 @@ var StudentRow = React.createClass({
+             <tr>
+                 <td>{this.props.enrollment.email}</td>
+                 <td>{this.getFullName()}</td>
++                <td>{this.props.enrollment.enrolledAt}</td>
+                 <td>
+                     <a href="#" onClick={this.handleDeleteClick}>X</a>
+                 </td>
+diff --git a/assets/js/course/app.js b/assets/js/course/app.js
+index 9f8fa4b..f5a1dfc 100644
+--- a/assets/js/course/app.js
++++ b/assets/js/course/app.js
+@@ -6,9 +6,10 @@ var CourseApp = require('./Components/CourseApp.react');
+ var course = {
+     name: 'Test Course'
+ };
++
+ var enrollments = [
+-    { id: 1, email: 'weaverryan@gmail.com', firstName: 'Ryan' },
+-    { id: 2, email: 'leannapelham@gmail.com', firstName: 'Leanna' }
++    { id: 1, email: 'weaverryan@gmail.com', firstName: 'Ryan', enrolledAt: '2016-06-05' },
++    { id: 2, email: 'leannapelham@gmail.com', firstName: 'Leanna', enrolledAt: '2016-02-24' }
+ ];
+ 
+ $(document).ready(function() {

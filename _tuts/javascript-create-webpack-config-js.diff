@@ -1,0 +1,16 @@
+diff --git a/assets/webpack.config.js b/assets/webpack.config.js
+new file mode 100644
+index 0000000..c692040
+--- /dev/null
++++ b/assets/webpack.config.js
+@@ -0,0 +1,10 @@
++var path = require("path");
++
++module.exports = {
++    entry: './js/course/app.js',
++    output: {
++        path: path.resolve(__dirname, '../web/js'),
++        filename: 'course.js',
++        publicPath: '/js/'
++    }
++}

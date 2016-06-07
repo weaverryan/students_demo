@@ -1,0 +1,178 @@
+diff --git a/app/Resources/views/course/edit.html.twig b/app/Resources/views/course/edit.html.twig
+index 3719929..d29820e 100644
+--- a/app/Resources/views/course/edit.html.twig
++++ b/app/Resources/views/course/edit.html.twig
+@@ -3,6 +3,10 @@
+ {% block javascripts %}
+     {{ parent() }}
+ 
++    <script>
++        window.studentEnrollmentDetails = {{ enrollmentDetails|serialize('json')|raw }}
++    </script>
++
+     {% if app.debug %}
+         <script src="{{ asset('webpack-dev-server.js') }}"></script>
+     {% endif %}
+diff --git a/assets/js/course/app.js b/assets/js/course/app.js
+index f5a1dfc..1016e50 100644
+--- a/assets/js/course/app.js
++++ b/assets/js/course/app.js
+@@ -7,10 +7,7 @@ var course = {
+     name: 'Test Course'
+ };
+ 
+-var enrollments = [
+-    { id: 1, email: 'weaverryan@gmail.com', firstName: 'Ryan', enrolledAt: '2016-06-05' },
+-    { id: 2, email: 'leannapelham@gmail.com', firstName: 'Leanna', enrolledAt: '2016-02-24' }
+-];
++var enrollments = window.studentEnrollmentDetails;
+ 
+ $(document).ready(function() {
+     ReactDOM.render(<CourseApp course={course} enrollments={enrollments} />, document.getElementById('course_edit'));
+diff --git a/src/AppBundle/Api/Model/StudentEnrollmentDetails.php b/src/AppBundle/Api/Model/StudentEnrollmentDetails.php
+new file mode 100644
+index 0000000..293e493
+--- /dev/null
++++ b/src/AppBundle/Api/Model/StudentEnrollmentDetails.php
+@@ -0,0 +1,50 @@
++<?php
++
++namespace AppBundle\Api\Model;
++
++class StudentEnrollmentDetails
++{
++    private $id;
++
++    private $email;
++
++    private $firstName;
++
++    private $lastName;
++
++    private $enrolledAt;
++
++    public function __construct($id, $email, $firstName, $lastName, \DateTime $enrolledAt)
++    {
++        $this->id = $id;
++        $this->email = $email;
++        $this->firstName = $firstName;
++        $this->lastName = $lastName;
++        $this->enrolledAt = $enrolledAt;
++    }
++
++    public function getId()
++    {
++        return $this->id;
++    }
++
++    public function getEmail()
++    {
++        return $this->email;
++    }
++
++    public function getFirstName()
++    {
++        return $this->firstName;
++    }
++
++    public function getLastName()
++    {
++        return $this->lastName;
++    }
++
++    public function getEnrolledAt()
++    {
++        return $this->enrolledAt;
++    }
++}
+diff --git a/src/AppBundle/Controller/CourseController.php b/src/AppBundle/Controller/CourseController.php
+index 4eb5580..4f803f1 100644
+--- a/src/AppBundle/Controller/CourseController.php
++++ b/src/AppBundle/Controller/CourseController.php
+@@ -2,6 +2,7 @@
+ 
+ namespace AppBundle\Controller;
+ 
++use AppBundle\Api\Model\StudentEnrollmentDetails;
+ use AppBundle\Entity\Course;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+@@ -27,8 +28,21 @@ class CourseController extends Controller
+      */
+     public function editAction(Course $course)
+     {
++        $enrollmentDetails = [];
++
++        foreach ($course->getStudentEnrollments() as $studentEnrollment) {
++            $enrollmentDetails[] = new StudentEnrollmentDetails(
++                $studentEnrollment->getId(),
++                $studentEnrollment->getStudent()->getEmail(),
++                $studentEnrollment->getStudent()->getFirstName(),
++                $studentEnrollment->getStudent()->getLastName(),
++                $studentEnrollment->getEnrolledAt()
++            );
++        }
++
+         return $this->render('course/edit.html.twig', [
+-            'course' => $course
++            'course' => $course,
++            'enrollmentDetails' => $enrollmentDetails
+         ]);
+     }
+ }
+diff --git a/src/AppBundle/Entity/Course.php b/src/AppBundle/Entity/Course.php
+index 15eacc0..5f77565 100644
+--- a/src/AppBundle/Entity/Course.php
++++ b/src/AppBundle/Entity/Course.php
+@@ -2,6 +2,7 @@
+ 
+ namespace AppBundle\Entity;
+ 
++use Doctrine\Common\Collections\ArrayCollection;
+ use Doctrine\ORM\Mapping as ORM;
+ 
+ /**
+@@ -22,6 +23,17 @@ class Course
+      */
+     private $name;
+ 
++    /**
++     * @ORM\OneToMany(targetEntity="StudentEnrollment", mappedBy="course")
++     */
++    private $studentEnrollments;
++
++    public function __construct()
++    {
++        $this->studentEnrollments = new ArrayCollection();
++    }
++
++
+     public function getId()
+     {
+         return $this->id;
+@@ -36,4 +48,12 @@ class Course
+     {
+         $this->name = $name;
+     }
++
++    /**
++     * @return ArrayCollection|StudentEnrollment[]
++     */
++    public function getStudentEnrollments()
++    {
++        return $this->studentEnrollments;
++    }
+ }
+diff --git a/src/AppBundle/Entity/StudentEnrollment.php b/src/AppBundle/Entity/StudentEnrollment.php
+index ba0e8ab..4e9cd31 100644
+--- a/src/AppBundle/Entity/StudentEnrollment.php
++++ b/src/AppBundle/Entity/StudentEnrollment.php
+@@ -21,7 +21,7 @@ class StudentEnrollment
+     private $id;
+ 
+     /**
+-     * @ORM\ManyToOne(targetEntity="Course")
++     * @ORM\ManyToOne(targetEntity="Course", inversedBy="studentEnrollments")
+      * @ORM\JoinColumn(nullable=false)
+      */
+     private $course;

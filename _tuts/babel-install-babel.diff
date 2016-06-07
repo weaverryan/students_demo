@@ -1,0 +1,24 @@
+diff --git a/.gitignore b/.gitignore
+index 93821ad..da7ad70 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -14,3 +14,4 @@
+ !var/SymfonyRequirements.php
+ /vendor/
+ /web/bundles/
++/node_modules/
+diff --git a/package.json b/package.json
+index 1f34a59..48a6e90 100644
+--- a/package.json
++++ b/package.json
+@@ -18,5 +18,9 @@
+   "bugs": {
+     "url": "https://github.com/weaverryan/students_demo/issues"
+   },
+-  "homepage": "https://github.com/weaverryan/students_demo#readme"
++  "homepage": "https://github.com/weaverryan/students_demo#readme",
++  "devDependencies": {
++    "babel-core": "^6.9.1",
++    "babel-loader": "^6.2.4"
++  }
+ }

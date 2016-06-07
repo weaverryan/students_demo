@@ -1,0 +1,80 @@
+diff --git a/assets/js/course/Components/CourseApp.react.js b/assets/js/course/Components/CourseApp.react.js
+index 205719f..0fa00e7 100644
+--- a/assets/js/course/Components/CourseApp.react.js
++++ b/assets/js/course/Components/CourseApp.react.js
+@@ -6,7 +6,7 @@ var CourseApp = React.createClass({
+       return (
+           <div>
+               <h1>{this.props.course.name}</h1>
+-                <StudentList />
++                <StudentList enrollments={this.props.enrollments} />
+           </div>
+       );
+   }
+diff --git a/assets/js/course/Components/StudentList.react.js b/assets/js/course/Components/StudentList.react.js
+index e2b1071..aa01f86 100644
+--- a/assets/js/course/Components/StudentList.react.js
++++ b/assets/js/course/Components/StudentList.react.js
+@@ -1,11 +1,23 @@
+ var React = require('react');
++var StudentRow = require('./StudentRow.react');
+ 
+ var StudentList = React.createClass({
+     render: function () {
++        var rows = this.props.enrollments.map(function(enrollment) {
++            return (
++                <StudentRow
++                    enrollment={enrollment}
++                    key={enrollment.id}
++                />
++            );
++        });
++
+         return (
+-            <ul>
+-                <li>Test!</li>
+-            </ul>
++            <table className="table">
++                <tbody>
++                    {rows}
++                </tbody>
++            </table>
+         );
+     }
+ });
+diff --git a/assets/js/course/Components/StudentRow.react.js b/assets/js/course/Components/StudentRow.react.js
+new file mode 100644
+index 0000000..b1f3d85
+--- /dev/null
++++ b/assets/js/course/Components/StudentRow.react.js
+@@ -0,0 +1,13 @@
++var React = require('react');
++
++var StudentRow = React.createClass({
++    render: function () {
++        return (
++            <tr>
++                <td>I'm a student row!</td>
++            </tr>
++        )
++    }
++});
++
++module.exports = StudentRow;
+diff --git a/assets/js/course/app.js b/assets/js/course/app.js
+index ab55ff5..9f8fa4b 100644
+--- a/assets/js/course/app.js
++++ b/assets/js/course/app.js
+@@ -6,7 +6,11 @@ var CourseApp = require('./Components/CourseApp.react');
+ var course = {
+     name: 'Test Course'
+ };
++var enrollments = [
++    { id: 1, email: 'weaverryan@gmail.com', firstName: 'Ryan' },
++    { id: 2, email: 'leannapelham@gmail.com', firstName: 'Leanna' }
++];
+ 
+ $(document).ready(function() {
+-    ReactDOM.render(<CourseApp course={course} />, document.getElementById('course_edit'));
++    ReactDOM.render(<CourseApp course={course} enrollments={enrollments} />, document.getElementById('course_edit'));
+ });

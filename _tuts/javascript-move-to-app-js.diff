@@ -1,0 +1,30 @@
+diff --git a/app/Resources/views/course/edit.html.twig b/app/Resources/views/course/edit.html.twig
+index d60bae5..3401fe3 100644
+--- a/app/Resources/views/course/edit.html.twig
++++ b/app/Resources/views/course/edit.html.twig
+@@ -3,13 +3,7 @@
+ {% block javascripts %}
+     {{ parent() }}
+ 
+-    <script>
+-        jQuery(document).ready(function() {
+-            $('#course_edit .js-alert').on('click', function() {
+-                alert('yay!');
+-            });
+-        });
+-    </script>
++    <script src="{{ asset('js/course.js') }}"></script>
+ {% endblock %}
+ 
+ {% block body %}
+diff --git a/assets/js/course/app.js b/assets/js/course/app.js
+new file mode 100644
+index 0000000..f309f17
+--- /dev/null
++++ b/assets/js/course/app.js
+@@ -0,0 +1,5 @@
++jQuery(document).ready(function() {
++    $('#course_edit .js-alert').on('click', function() {
++        alert('yay!');
++    });
++});

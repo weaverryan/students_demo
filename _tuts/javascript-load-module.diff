@@ -1,0 +1,26 @@
+diff --git a/assets/js/course/alerter.js b/assets/js/course/alerter.js
+new file mode 100644
+index 0000000..c6a2bce
+--- /dev/null
++++ b/assets/js/course/alerter.js
+@@ -0,0 +1,7 @@
++var alerter = {
++    sendAlert: function(msg) {
++        alert(msg);
++    }
++};
++
++module.exports = alerter;
+diff --git a/assets/js/course/app.js b/assets/js/course/app.js
+index f309f17..6b45efe 100644
+--- a/assets/js/course/app.js
++++ b/assets/js/course/app.js
+@@ -1,5 +1,7 @@
++var alerter = require('./alerter');
++
+ jQuery(document).ready(function() {
+     $('#course_edit .js-alert').on('click', function() {
+-        alert('yay!');
++        alerter.sendAlert('Yay');
+     });
+ });

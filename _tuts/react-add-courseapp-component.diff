@@ -1,0 +1,36 @@
+diff --git a/assets/js/course/Components/CourseApp.react.js b/assets/js/course/Components/CourseApp.react.js
+new file mode 100644
+index 0000000..3136f34
+--- /dev/null
++++ b/assets/js/course/Components/CourseApp.react.js
+@@ -0,0 +1,11 @@
++var React = require('react');
++
++var CourseApp = React.createClass({
++  render: function() {
++      return (
++          <h1>Hello!</h1>
++      );
++  }
++});
++
++module.exports = CourseApp;
+diff --git a/assets/js/course/app.js b/assets/js/course/app.js
+index bb11c59..0512244 100644
+--- a/assets/js/course/app.js
++++ b/assets/js/course/app.js
+@@ -1,12 +1,7 @@
+ var React = require('react');
+ var ReactDOM = require('react-dom');
+-
+-var Hello = React.createClass({
+-  render: function() {
+-    return <h1>Hello</h1>
+-  }
+-});
++var CourseApp = require('./Components/CourseApp.react');
+ 
+ $(document).ready(function() {
+-    ReactDOM.render(<Hello/>, document.getElementById('course_edit'));
++    ReactDOM.render(<CourseApp/>, document.getElementById('course_edit'));
+ });

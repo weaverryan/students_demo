@@ -1,0 +1,55 @@
+diff --git a/assets/js/course/Components/StudentList.react.js b/assets/js/course/Components/StudentList.react.js
+index aa01f86..aadd10a 100644
+--- a/assets/js/course/Components/StudentList.react.js
++++ b/assets/js/course/Components/StudentList.react.js
+@@ -2,12 +2,37 @@ var React = require('react');
+ var StudentRow = require('./StudentRow.react');
+ 
+ var StudentList = React.createClass({
++    getInitialState: function() {
++        return {
++            'enrollments': this.props.enrollments
++        }
++    },
++
++    removeStudent(id) {
++        var matchedKey;
++        var enrollments = this.state.enrollments;
++
++        $.each(enrollments, function(key, student) {
++            if (student.id == id) {
++                matchedKey = key;
++            }
++        });
++
++        enrollments.splice(matchedKey, 1);
++
++        this.setState({
++            'enrollments': enrollments
++        });
++    },
++
+     render: function () {
++        var self = this;
+         var rows = this.props.enrollments.map(function(enrollment) {
+             return (
+                 <StudentRow
+                     enrollment={enrollment}
+                     key={enrollment.id}
++                    onRemoveStudent={self.removeStudent.bind(self, enrollment.id)}
+                 />
+             );
+         });
+diff --git a/assets/js/course/Components/StudentRow.react.js b/assets/js/course/Components/StudentRow.react.js
+index 9d6efec..20299e8 100644
+--- a/assets/js/course/Components/StudentRow.react.js
++++ b/assets/js/course/Components/StudentRow.react.js
+@@ -4,7 +4,7 @@ var StudentRow = React.createClass({
+     handleDeleteClick: function(e) {
+         e.preventDefault();
+ 
+-        alert('clicked!');
++        this.props.onRemoveStudent();
+     },
+ 
+     getFullName: function() {

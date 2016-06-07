@@ -1,0 +1,20 @@
+diff --git a/assets/js/course/app.js b/assets/js/course/app.js
+index 31c43f1..bb11c59 100644
+--- a/assets/js/course/app.js
++++ b/assets/js/course/app.js
+@@ -1,5 +1,12 @@
+-import alerter from "./alerter";
++var React = require('react');
++var ReactDOM = require('react-dom');
+ 
+-jQuery(document).ready(function() {
+-    var alertApp = new alerter($('#course_edit'));
++var Hello = React.createClass({
++  render: function() {
++    return <h1>Hello</h1>
++  }
++});
++
++$(document).ready(function() {
++    ReactDOM.render(<Hello/>, document.getElementById('course_edit'));
+ });

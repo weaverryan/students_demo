@@ -199,7 +199,187 @@
             "id": "course-create-basic-edit-page",
             "name": "Course: Create basic edit page",
             "description": null
+        },
+        {
+            "id": "javascript-basic-jquery-in-template",
+            "name": "JavaScript: Basic jQuery in template",
+            "description": null
+        },
+        {
+            "id": "javascript-move-to-app-js",
+            "name": "JavaScript: Move to app.js",
+            "description": null
+        },
+        {
+            "id": "javascript-load-module",
+            "name": "JavaScript: Load module",
+            "description": null
+        },
+        {
+            "id": "javascript-create-webpack-config-js",
+            "name": "JavaScript: Create webpack.config.js",
+            "description": null
+        },
+        {
+            "id": "oo-move-to-initialize-function",
+            "name": "OO: Move to initialize function",
+            "description": null
+        },
+        {
+            "id": "oo-using-proxy-to-fix-things",
+            "name": "OO: Using proxy to fix things",
+            "description": null
+        },
+        {
+            "id": "oo-using-data-attribute-and-currenttarget",
+            "name": "OO: Using data attribute and currentTarget",
+            "description": null
+        },
+        {
+            "id": "oo-adding-other-link-does-not-work",
+            "name": "OO: Adding other link, does not work",
+            "description": null
+        },
+        {
+            "id": "oo-delegate-selector",
+            "name": "OO: Delegate selector",
+            "description": null
+        },
+        {
+            "id": "oo-pass-in-wrapper",
+            "name": "OO: Pass in wrapper",
+            "description": null
+        },
+        {
+            "id": "oo-adding-constructor",
+            "name": "OO: Adding constructor",
+            "description": null
+        },
+        {
+            "id": "javascript-use-es2015-imports",
+            "name": "JavaScript: Use Es2015 imports",
+            "description": null
+        },
+        {
+            "id": "javascript-init-npm",
+            "name": "JavaScript: init npm",
+            "description": null
+        },
+        {
+            "id": "babel-install-babel",
+            "name": "Babel: Install babel",
+            "description": null
+        },
+        {
+            "id": "babel-install-es2015-presets",
+            "name": "Babel: Install es2015 presets",
+            "description": null
+        },
+        {
+            "id": "babel-add-loader",
+            "name": "Babel: Add Loader",
+            "description": null
+        },
+        {
+            "id": "react-bootstrapping-mini-app",
+            "name": "React: Bootstrapping mini-app",
+            "description": null
+        },
+        {
+            "id": "react-installing-react-preset",
+            "name": "React: Installing react preset",
+            "description": null
+        },
+        {
+            "id": "react-install-react",
+            "name": "React: Install react",
+            "description": null
+        },
+        {
+            "id": "react-dev-server",
+            "name": "React: Dev server",
+            "description": null
+        },
+        {
+            "id": "webpack-add-devtools",
+            "name": "Webpack: Add devtools",
+            "description": null
+        },
+        {
+            "id": "react-add-courseapp-component",
+            "name": "React: Add CourseApp component",
+            "description": null
+        },
+        {
+            "id": "react-pass-basic-props",
+            "name": "React: Pass basic props",
+            "description": null
+        },
+        {
+            "id": "react-add-studentlist-component",
+            "name": "React: Add StudentList component",
+            "description": null
+        },
+        {
+            "id": "react-start-studentrow",
+            "name": "React: Start StudentRow",
+            "description": null
+        },
+        {
+            "id": "react-more-fields-in-row",
+            "name": "React: More fields in row",
+            "description": null
+        },
+        {
+            "id": "react-start-delete-link",
+            "name": "React: Start delete link",
+            "description": null
+        },
+        {
+            "id": "react-add-delete-callback",
+            "name": "React: Add delete callback",
+            "description": null
+        },
+        {
+            "id": "enrollment-add-enrolledat-date",
+            "name": "Enrollment: Add enrolledAt date",
+            "description": null
+        },
+        {
+            "id": "enrollment-printing-enrolledat",
+            "name": "Enrollment: Printing enrolledAt",
+            "description": null
+        },
+        {
+            "id": "enrollment-create-studentenrollmentdetails",
+            "name": "Enrollment: Create StudentEnrollmentDetails",
+            "description": null
+        },
+        {
+            "id": "enrollment-add-delete-endpoint",
+            "name": "Enrollment: Add delete endpoint",
+            "description": null
+        },
+        {
+            "id": "enrollment-send-delete-url-on-object",
+            "name": "Enrollment: Send delete URL on object",
+            "description": null
+        },
+        {
+            "id": "enrollment-install-fontawesome",
+            "name": "Enrollment: Install FontAwesome",
+            "description": null
+        },
+        {
+            "id": "enrollment-adding-delete-animation",
+            "name": "Enrollment: Adding delete animation",
+            "description": null
+        },
+        {
+            "id": "hateoas-install-and-use-bundle",
+            "name": "HATEOAS: Install and use bundle",
+            "description": null
         }
     ],
-    "sha": "8237ed364e38c907f1bf48fc690ae979f60d65cd"
+    "sha": "80e50e59cda7cbfa1ccd401506718d607fc4ab93"
 }

@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+index 48a6e90..b41d619 100644
+--- a/package.json
++++ b/package.json
+@@ -21,6 +21,7 @@
+   "homepage": "https://github.com/weaverryan/students_demo#readme",
+   "devDependencies": {
+     "babel-core": "^6.9.1",
+-    "babel-loader": "^6.2.4"
++    "babel-loader": "^6.2.4",
++    "babel-preset-es2015": "^6.9.0"
+   }
+ }

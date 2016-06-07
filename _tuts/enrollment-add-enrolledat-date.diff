@@ -1,0 +1,80 @@
+diff --git a/app/DoctrineMigrations/Version20160607082604.php b/app/DoctrineMigrations/Version20160607082604.php
+new file mode 100644
+index 0000000..c3e2b85
+--- /dev/null
++++ b/app/DoctrineMigrations/Version20160607082604.php
+@@ -0,0 +1,34 @@
++<?php
++
++namespace Application\Migrations;
++
++use Doctrine\DBAL\Migrations\AbstractMigration;
++use Doctrine\DBAL\Schema\Schema;
++
++/**
++ * Auto-generated Migration: Please modify to your needs!
++ */
++class Version20160607082604 extends AbstractMigration
++{
++    /**
++     * @param Schema $schema
++     */
++    public function up(Schema $schema)
++    {
++        // this up() migration is auto-generated, please modify it to your needs
++        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
++
++        $this->addSql('ALTER TABLE student_enrollment ADD enrolled_at DATE NOT NULL');
++    }
++
++    /**
++     * @param Schema $schema
++     */
++    public function down(Schema $schema)
++    {
++        // this down() migration is auto-generated, please modify it to your needs
++        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
++
++        $this->addSql('ALTER TABLE student_enrollment DROP enrolled_at');
++    }
++}
+diff --git a/src/AppBundle/DataFixtures/ORM/student_enrollment.yml b/src/AppBundle/DataFixtures/ORM/student_enrollment.yml
+index dbd4f31..5dc2441 100644
+--- a/src/AppBundle/DataFixtures/ORM/student_enrollment.yml
++++ b/src/AppBundle/DataFixtures/ORM/student_enrollment.yml
+@@ -2,3 +2,4 @@ AppBundle\Entity\StudentEnrollment:
+     student.enrollment_{1..10}:
+         course: '@course_1'
+         student: '@student_*'
++        enrolledAt: '<dateTimeThisYear()>'
+diff --git a/src/AppBundle/Entity/StudentEnrollment.php b/src/AppBundle/Entity/StudentEnrollment.php
+index 61caedf..ba0e8ab 100644
+--- a/src/AppBundle/Entity/StudentEnrollment.php
++++ b/src/AppBundle/Entity/StudentEnrollment.php
+@@ -32,6 +32,11 @@ class StudentEnrollment
+      */
+     private $student;
+ 
++    /**
++     * @ORM\Column(type="date")
++     */
++    private $enrolledAt;
++
+     public function getId()
+     {
+         return $this->id;
+@@ -70,4 +75,14 @@ class StudentEnrollment
+     {
+         return $this->getStudent()->getId();
+     }
++
++    public function getEnrolledAt()
++    {
++        return $this->enrolledAt;
++    }
++
++    public function setEnrolledAt(\DateTime $enrolledAt)
++    {
++        $this->enrolledAt = $enrolledAt;
++    }
+ }

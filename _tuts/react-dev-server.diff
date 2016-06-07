@@ -1,0 +1,28 @@
+diff --git a/app/Resources/views/course/edit.html.twig b/app/Resources/views/course/edit.html.twig
+index 3ac2770..3719929 100644
+--- a/app/Resources/views/course/edit.html.twig
++++ b/app/Resources/views/course/edit.html.twig
+@@ -3,6 +3,9 @@
+ {% block javascripts %}
+     {{ parent() }}
+ 
++    {% if app.debug %}
++        <script src="{{ asset('webpack-dev-server.js') }}"></script>
++    {% endif %}
+     <script src="{{ asset('js/course.js') }}"></script>
+ {% endblock %}
+ 
+diff --git a/app/config/config.yml b/app/config/config.yml
+index 8228f8d..5e86d59 100644
+--- a/app/config/config.yml
++++ b/app/config/config.yml
+@@ -30,7 +30,8 @@ framework:
+         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+     fragments:       ~
+     http_method_override: true
+-    assets: ~
++    assets:
++        base_urls: http://localhost:8090
+ 
+ # Twig Configuration
+ twig:

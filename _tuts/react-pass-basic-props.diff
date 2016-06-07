@@ -1,0 +1,32 @@
+diff --git a/assets/js/course/Components/CourseApp.react.js b/assets/js/course/Components/CourseApp.react.js
+index 3136f34..c26de77 100644
+--- a/assets/js/course/Components/CourseApp.react.js
++++ b/assets/js/course/Components/CourseApp.react.js
+@@ -3,7 +3,9 @@ var React = require('react');
+ var CourseApp = React.createClass({
+   render: function() {
+       return (
+-          <h1>Hello!</h1>
++          <div>
++              <h1>{this.props.course.name}</h1>
++          </div>
+       );
+   }
+ });
+diff --git a/assets/js/course/app.js b/assets/js/course/app.js
+index 0512244..ab55ff5 100644
+--- a/assets/js/course/app.js
++++ b/assets/js/course/app.js
+@@ -2,6 +2,11 @@ var React = require('react');
+ var ReactDOM = require('react-dom');
+ var CourseApp = require('./Components/CourseApp.react');
+ 
++
++var course = {
++    name: 'Test Course'
++};
++
+ $(document).ready(function() {
+-    ReactDOM.render(<CourseApp/>, document.getElementById('course_edit'));
++    ReactDOM.render(<CourseApp course={course} />, document.getElementById('course_edit'));
+ });

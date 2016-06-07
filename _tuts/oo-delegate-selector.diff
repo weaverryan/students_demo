@@ -1,0 +1,13 @@
+diff --git a/assets/js/course/alerter.js b/assets/js/course/alerter.js
+index c68497a..56d9eae 100644
+--- a/assets/js/course/alerter.js
++++ b/assets/js/course/alerter.js
+@@ -2,7 +2,7 @@
+ 
+ var alerter = {
+     initialize: function() {
+-        $('#course_edit .js-alert').on('click', $.proxy(this._handleSendAlertClick, this));
++        $('#course_edit').on('click', '.js-alert', $.proxy(this._handleSendAlertClick, this));
+     },
+ 
+     _handleSendAlertClick: function(e) {

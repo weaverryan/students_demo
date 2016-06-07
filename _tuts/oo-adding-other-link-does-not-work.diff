@@ -1,0 +1,16 @@
+diff --git a/assets/js/course/alerter.js b/assets/js/course/alerter.js
+index 0c56cac..c68497a 100644
+--- a/assets/js/course/alerter.js
++++ b/assets/js/course/alerter.js
+@@ -10,6 +10,11 @@ var alerter = {
+ 
+         var message = $(e.currentTarget).data('message');
+ 
++        var newLink = $(e.currentTarget).clone();
++        newLink.data('message', 'Other');
++        newLink.html('Other clicky');
++        $('#course_edit').append(newLink);
++
+         this.sendAlert(message);
+     },
+ 

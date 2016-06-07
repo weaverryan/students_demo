@@ -1,0 +1,34 @@
+diff --git a/assets/js/course/alerter.js b/assets/js/course/alerter.js
+index c6a2bce..641968f 100644
+--- a/assets/js/course/alerter.js
++++ b/assets/js/course/alerter.js
+@@ -1,4 +1,16 @@
++
++
+ var alerter = {
++    initialize: function() {
++        $('#course_edit .js-alert').on('click', this._handleSendAlertClick);
++    },
++
++    _handleSendAlertClick: function(e) {
++        e.preventDefault();
++
++        this.sendAlert('Yay');
++    },
++
+     sendAlert: function(msg) {
+         alert(msg);
+     }
+diff --git a/assets/js/course/app.js b/assets/js/course/app.js
+index 6b45efe..c1e49d7 100644
+--- a/assets/js/course/app.js
++++ b/assets/js/course/app.js
+@@ -1,7 +1,5 @@
+ var alerter = require('./alerter');
+ 
+ jQuery(document).ready(function() {
+-    $('#course_edit .js-alert').on('click', function() {
+-        alerter.sendAlert('Yay');
+-    });
++    alerter.initialize();
+ });

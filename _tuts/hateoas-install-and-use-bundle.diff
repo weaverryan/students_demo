@@ -1,0 +1,203 @@
+diff --git a/app/AppKernel.php b/app/AppKernel.php
+index 4630504..69a6e19 100644
+--- a/app/AppKernel.php
++++ b/app/AppKernel.php
+@@ -20,6 +20,8 @@ class AppKernel extends Kernel
+             new DoctrineMigrationsBundle(),
+             new JMS\SerializerBundle\JMSSerializerBundle(),
+             new FOS\RestBundle\FOSRestBundle(),
++            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
++
+         ];
+ 
+         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
+diff --git a/assets/js/course/Components/StudentList.react.js b/assets/js/course/Components/StudentList.react.js
+index d0a2c65..d5a3863 100644
+--- a/assets/js/course/Components/StudentList.react.js
++++ b/assets/js/course/Components/StudentList.react.js
+@@ -19,7 +19,7 @@ var StudentList = React.createClass({
+         });
+ 
+         var self = this;
+-        var url = enrollments[matchedKey].url;
++        var url = enrollments[matchedKey]._links.self.href;
+         $.ajax({
+             url: url,
+             method: 'DELETE',
+diff --git a/composer.json b/composer.json
+index d0610bb..c3d22de 100644
+--- a/composer.json
++++ b/composer.json
+@@ -30,7 +30,8 @@
+         "incenteev/composer-parameter-handler": "^2.0",
+         "doctrine/doctrine-migrations-bundle": "^1.1",
+         "jms/serializer-bundle": "^1.1",
+-        "friendsofsymfony/rest-bundle": "^1.7"
++        "friendsofsymfony/rest-bundle": "^1.7",
++        "willdurand/hateoas-bundle": "^1.1"
+     },
+     "require-dev": {
+         "sensio/generator-bundle": "^3.0",
+diff --git a/composer.lock b/composer.lock
+index 9b55678..2321681 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,8 +4,8 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+         "This file is @generated automatically"
+     ],
+-    "hash": "a98db2bf1101e472133e69a296e8207c",
+-    "content-hash": "0f5c039de54ec25c9b9d423e64b97e42",
++    "hash": "95dd6ce089e191ac349652b2f35c5059",
++    "content-hash": "b224662704b6bcc9e59a2681f918c011",
+     "packages": [
+         {
+             "name": "doctrine/annotations",
+@@ -2505,6 +2505,123 @@
+             "time": "2016-01-25 21:22:18"
+         },
+         {
++            "name": "willdurand/hateoas",
++            "version": "2.10.0",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/willdurand/Hateoas.git",
++                "reference": "ada89d867e47040f8c4be3be2c8e7930a3d01189"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/ada89d867e47040f8c4be3be2c8e7930a3d01189",
++                "reference": "ada89d867e47040f8c4be3be2c8e7930a3d01189",
++                "shasum": ""
++            },
++            "require": {
++                "doctrine/annotations": "~1.0",
++                "doctrine/common": "~2.0",
++                "jms/metadata": "~1.1",
++                "jms/serializer": "~1.0",
++                "php": ">=5.4",
++                "phpoption/phpoption": ">=1.1.0,<2.0-dev",
++                "symfony/expression-language": "~2.4 || ~3.0"
++            },
++            "require-dev": {
++                "pagerfanta/pagerfanta": "~1.0",
++                "phpunit/phpunit": "~4.5",
++                "symfony/dependency-injection": "~2.4 || ~3.0",
++                "symfony/routing": "~2.4 || ~3.0",
++                "symfony/yaml": "~2.4 || ~3.0",
++                "twig/twig": "~1.12"
++            },
++            "suggest": {
++                "symfony/routing": "To use the SymfonyRouteFactory.",
++                "symfony/yaml": "To use yaml based configuration.",
++                "twig/twig": "To use the Twig extensions."
++            },
++            "type": "library",
++            "extra": {
++                "branch-alias": {
++                    "dev-master": "2.10-dev"
++                }
++            },
++            "autoload": {
++                "psr-0": {
++                    "Hateoas": "src/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Adrien Brault",
++                    "email": "adrien.brault@gmail.com"
++                },
++                {
++                    "name": "William Durand",
++                    "email": "william.durand1@gmail.com"
++                }
++            ],
++            "description": "A PHP library to support implementing representations for HATEOAS REST web services",
++            "time": "2016-05-19 11:30:35"
++        },
++        {
++            "name": "willdurand/hateoas-bundle",
++            "version": "1.1.1",
++            "target-dir": "Bazinga/Bundle/HateoasBundle",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/willdurand/BazingaHateoasBundle.git",
++                "reference": "a53f6f1d3d8cda3fa8cdd90773cb48e9647a08c5"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/a53f6f1d3d8cda3fa8cdd90773cb48e9647a08c5",
++                "reference": "a53f6f1d3d8cda3fa8cdd90773cb48e9647a08c5",
++                "shasum": ""
++            },
++            "require": {
++                "jms/serializer-bundle": "~1.0",
++                "symfony/framework-bundle": "~2.2 || ~3.0",
++                "willdurand/hateoas": "~2.9"
++            },
++            "require-dev": {
++                "phpunit/phpunit": "~4.5",
++                "symfony/expression-language": "~2.4 || ~3.0",
++                "twig/twig": "~1.12"
++            },
++            "type": "symfony-bundle",
++            "extra": {
++                "branch-alias": {
++                    "dev-master": "1.2-dev"
++                }
++            },
++            "autoload": {
++                "psr-0": {
++                    "Bazinga\\Bundle\\HateoasBundle": ""
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "William Durand",
++                    "email": "william.durand1@gmail.com"
++                }
++            ],
++            "description": "Integration of Hateoas into Symfony2.",
++            "keywords": [
++                "HATEOAS",
++                "rest"
++            ],
++            "time": "2016-02-22 13:12:41"
++        },
++        {
+             "name": "willdurand/jsonp-callback-validator",
+             "version": "v1.1.0",
+             "source": {
+diff --git a/src/AppBundle/Api/Model/StudentEnrollmentDetails.php b/src/AppBundle/Api/Model/StudentEnrollmentDetails.php
+index 3f25dc8..59339bc 100644
+--- a/src/AppBundle/Api/Model/StudentEnrollmentDetails.php
++++ b/src/AppBundle/Api/Model/StudentEnrollmentDetails.php
+@@ -2,6 +2,19 @@
+ 
+ namespace AppBundle\Api\Model;
+ 
++use Hateoas\Configuration\Annotation as Hateoas;
++
++/**
++ * @Hateoas\Relation(
++ *      "self",
++ *      href = @Hateoas\Route(
++ *          "api_enrollment_delete",
++ *          parameters={
++                "id": "expr(object.getId())"
++ *          }
++ *      )
++ * )
++ */
+ class StudentEnrollmentDetails
+ {
+     private $id;

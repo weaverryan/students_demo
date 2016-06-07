@@ -1,0 +1,27 @@
+diff --git a/app/Resources/views/course/edit.html.twig b/app/Resources/views/course/edit.html.twig
+index 3401fe3..3ac2770 100644
+--- a/app/Resources/views/course/edit.html.twig
++++ b/app/Resources/views/course/edit.html.twig
+@@ -10,6 +10,6 @@
+     <h1>Edit Course</h1>
+ 
+     <div id="course_edit">
+-        <button class="btn btn-primary js-alert">Alert</button>
++        <button class="btn btn-primary js-alert" data-message="Yay">Alert</button>
+     </div>
+ {% endblock %}
+diff --git a/assets/js/course/alerter.js b/assets/js/course/alerter.js
+index 63a58d1..0c56cac 100644
+--- a/assets/js/course/alerter.js
++++ b/assets/js/course/alerter.js
+@@ -8,7 +8,9 @@ var alerter = {
+     _handleSendAlertClick: function(e) {
+         e.preventDefault();
+ 
+-        this.sendAlert('Yay');
++        var message = $(e.currentTarget).data('message');
++
++        this.sendAlert(message);
+     },
+ 
+     sendAlert: function(msg) {
