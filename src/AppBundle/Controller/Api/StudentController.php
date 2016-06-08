@@ -7,12 +7,13 @@ use AppBundle\Form\StudentForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class StudentController extends Controller
+class StudentController extends ApiBaseController
 {
     /**
      * @Route("/api/students", name="api_student_create")
@@ -21,8 +22,7 @@ class StudentController extends Controller
     public function createAction(Request $request)
     {
         $form = $this->createForm(StudentForm::class);
-        $data = json_decode($request->getContent(), true);
-        $form->submit($data);
+        $this->submitForm($request, $form);
 
         if (!$form->isValid()) {
             throw new BadRequestHttpException();
@@ -50,8 +50,7 @@ class StudentController extends Controller
     public function editAction(Request $request, Student $student)
     {
         $form = $this->createForm(StudentForm::class, $student);
-        $data = json_decode($request->getContent(), true);
-        $form->submit($data);
+        $this->submitForm($request, $form);
 
         if (!$form->isValid()) {
             throw new BadRequestHttpException();
