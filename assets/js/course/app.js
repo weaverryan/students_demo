@@ -1,5 +1,12 @@
-import alerter from "./alerter";
+var React = require('react');
+var ReactDOM = require('react-dom');
 
-jQuery(document).ready(function() {
-    var alertApp = new alerter($('#course_edit'));
+var Hello = React.createClass({
+  render: function() {
+    return <h1>Hello</h1>
+  }
+});
+
+$(document).ready(function() {
+    ReactDOM.render(<Hello/>, document.getElementById('course_edit'));
 });
