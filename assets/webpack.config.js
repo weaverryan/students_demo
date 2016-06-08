@@ -6,5 +6,17 @@ module.exports = {
         path: path.resolve(__dirname, '../web/js'),
         filename: 'course.js',
         publicPath: '/js/'
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.js?$/,
+                exclude: /node_modules/,
+                loader: "babel-loader",
+                query: {
+                    presets: ['es2015']
+                }
+            }
+        ]
     }
 }
