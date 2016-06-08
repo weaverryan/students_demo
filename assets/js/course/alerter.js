@@ -8,7 +8,9 @@ var alerter = {
     _handleSendAlertClick: function(e) {
         e.preventDefault();
 
-        this.sendAlert('Yay');
+        var message = $(e.currentTarget).data('message');
+
+        this.sendAlert(message);
     },
 
     sendAlert: function(msg) {
