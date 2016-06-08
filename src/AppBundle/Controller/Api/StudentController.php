@@ -35,12 +35,7 @@ class StudentController extends ApiBaseController
         $em->persist($student);
         $em->flush();
 
-        $json = $this->container->get('jms_serializer')
-            ->serialize($student, 'json');
-
-        return new Response($json, 201, [
-            'Content-Type' => 'application/json'
-        ]);
+        return $this->createApiResponse($student, 201);
     }
 
     /**
@@ -60,11 +55,6 @@ class StudentController extends ApiBaseController
         $em->persist($student);
         $em->flush();
 
-        $json = $this->container->get('jms_serializer')
-            ->serialize($student, 'json');
-
-        return new Response($json, 200, [
-            'Content-Type' => 'application/json'
-        ]);
+        return $this->createApiResponse($student);
     }
 }

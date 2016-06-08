@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Api;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class ApiBaseController extends Controller
 {
@@ -16,5 +17,20 @@ abstract class ApiBaseController extends Controller
     {
         $data = json_decode($request->getContent(), true);
         $form->submit($data, !$request->isMethod('PATCH'));
+    }
+
+    /**
+     * @param $data
+     * @param integer $statusCode
+     * @return Response
+     */
+    protected function createApiResponse($data, $statusCode = 200)
+    {
+        $json = $this->container->get('jms_serializer')
+            ->serialize($data, 'json');
+
+        return new Response($json, $statusCode, [
+            'Content-Type' => 'application/json'
+        ]);
     }
 }
