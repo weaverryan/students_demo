@@ -3,7 +3,9 @@ var React = require('react');
 var CourseApp = React.createClass({
   render: function() {
       return (
-          <h1>Hello!</h1>
+          <div>
+              <h1>{this.props.course.name}</h1>
+          </div>
       );
   }
 });
