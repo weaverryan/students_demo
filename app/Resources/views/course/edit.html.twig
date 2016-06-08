@@ -3,6 +3,9 @@
 {% block javascripts %}
     {{ parent() }}
 
+    {% if app.debug %}
+        <script src="{{ asset('webpack-dev-server.js') }}"></script>
+    {% endif %}
     <script src="{{ asset('js/course.js') }}"></script>
 {% endblock %}
 
