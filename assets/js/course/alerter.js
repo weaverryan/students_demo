@@ -1,6 +1,10 @@
 
 
-var alerter = {
+var alerter = function($wrapper) {
+    this.initialize($wrapper);
+};
+
+$.extend(alerter.prototype, {
     initialize: function($wrapper) {
         this.$wrapper = $wrapper;
 
@@ -23,6 +27,6 @@ var alerter = {
     sendAlert: function(msg) {
         alert(msg);
     }
-};
+});
 
 module.exports = alerter;

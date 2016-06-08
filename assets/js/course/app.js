@@ -1,5 +1,5 @@
 var alerter = require('./alerter');
 
 jQuery(document).ready(function() {
-    alerter.initialize($('#course_edit'));
+    var alertApp = new alerter($('#course_edit'));
 });
