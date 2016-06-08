@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Api\Model\StudentEnrollmentDetails;
 use AppBundle\Entity\Course;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,8 +28,21 @@ class CourseController extends Controller
      */
     public function editAction(Course $course)
     {
+        $enrollmentDetails = [];
+
+        foreach ($course->getStudentEnrollments() as $studentEnrollment) {
+            $enrollmentDetails[] = new StudentEnrollmentDetails(
+                $studentEnrollment->getId(),
+                $studentEnrollment->getStudent()->getEmail(),
+                $studentEnrollment->getStudent()->getFirstName(),
+                $studentEnrollment->getStudent()->getLastName(),
+                $studentEnrollment->getEnrolledAt()
+            );
+        }
+
         return $this->render('course/edit.html.twig', [
-            'course' => $course
+            'course' => $course,
+            'enrollmentDetails' => $enrollmentDetails
         ]);
     }
 }

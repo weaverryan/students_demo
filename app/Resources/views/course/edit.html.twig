@@ -3,6 +3,10 @@
 {% block javascripts %}
     {{ parent() }}
 
+    <script>
+        window.studentEnrollmentDetails = {{ enrollmentDetails|serialize('json')|raw }}
+    </script>
+
     {% if app.debug %}
         <script src="{{ asset('webpack-dev-server.js') }}"></script>
     {% endif %}

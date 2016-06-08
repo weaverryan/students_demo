@@ -21,7 +21,7 @@ class StudentEnrollment
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Course")
+     * @ORM\ManyToOne(targetEntity="Course", inversedBy="studentEnrollments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $course;

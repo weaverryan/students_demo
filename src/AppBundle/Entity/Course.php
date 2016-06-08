@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +23,17 @@ class Course
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="StudentEnrollment", mappedBy="course")
+     */
+    private $studentEnrollments;
+
+    public function __construct()
+    {
+        $this->studentEnrollments = new ArrayCollection();
+    }
+
+
     public function getId()
     {
         return $this->id;
@@ -35,5 +47,13 @@ class Course
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return ArrayCollection|StudentEnrollment[]
+     */
+    public function getStudentEnrollments()
+    {
+        return $this->studentEnrollments;
     }
 }
