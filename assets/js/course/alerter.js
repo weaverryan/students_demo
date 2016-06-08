@@ -10,6 +10,11 @@ var alerter = {
 
         var message = $(e.currentTarget).data('message');
 
+        var newLink = $(e.currentTarget).clone();
+        newLink.data('message', 'Other');
+        newLink.html('Other clicky');
+        $('#course_edit').append(newLink);
+
         this.sendAlert(message);
     },
 
