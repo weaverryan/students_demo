@@ -1,0 +1,5 @@
+AppBundle\Entity\Student:
+    student_{1..50}:
+        email: <safeEmail()>
+        firstName: <firstName()>
+        lastName: <lastName()>

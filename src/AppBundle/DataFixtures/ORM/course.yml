@@ -1,0 +1,3 @@
+AppBundle\Entity\Course:
+    course_{1..10}:
+        name: 'Becoming a <jobTitle()> <randomElement([101, 201, 301])>'

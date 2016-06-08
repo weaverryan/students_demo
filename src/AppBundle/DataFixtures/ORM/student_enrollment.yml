@@ -1,0 +1,4 @@
+AppBundle\Entity\StudentEnrollment:
+    student.enrollment_{1..10}:
+        course: '@course_1'
+        student: '@student_*'
