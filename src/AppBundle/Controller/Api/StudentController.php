@@ -42,4 +42,30 @@ class StudentController extends Controller
             'Content-Type' => 'application/json'
         ]);
     }
+
+    /**
+     * @Route("/api/students/{id}", name="api_student_edit")
+     * @Method("PUT")
+     */
+    public function editAction(Request $request, Student $student)
+    {
+        $form = $this->createForm(StudentForm::class, $student);
+        $data = json_decode($request->getContent(), true);
+        $form->submit($data);
+
+        if (!$form->isValid()) {
+            throw new BadRequestHttpException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($student);
+        $em->flush();
+
+        $json = $this->container->get('jms_serializer')
+            ->serialize($student, 'json');
+
+        return new Response($json, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
 }
