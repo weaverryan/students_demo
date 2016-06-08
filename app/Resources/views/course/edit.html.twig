@@ -1,7 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        jQuery(document).ready(function() {
+            $('#course_edit .js-alert').on('click', function() {
+                alert('yay!');
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block body %}
     <h1>Edit Course</h1>
 
-
+    <div id="course_edit">
+        <button class="btn btn-primary js-alert">Alert</button>
+    </div>
 {% endblock %}
