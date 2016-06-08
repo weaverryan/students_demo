@@ -45,7 +45,7 @@ class StudentController extends ApiBaseController
 
     /**
      * @Route("/api/students/{id}", name="api_student_edit")
-     * @Method("PUT")
+     * @Method({"PUT", "PATCH"})
      */
     public function editAction(Request $request, Student $student)
     {

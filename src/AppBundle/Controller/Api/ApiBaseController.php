@@ -15,6 +15,6 @@ abstract class ApiBaseController extends Controller
     protected function submitForm(Request $request, Form $form)
     {
         $data = json_decode($request->getContent(), true);
-        $form->submit($data);
+        $form->submit($data, !$request->isMethod('PATCH'));
     }
 }
