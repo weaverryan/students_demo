@@ -32,6 +32,11 @@ class StudentEnrollment
      */
     private $student;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $enrolledAt;
+
     public function getId()
     {
         return $this->id;
@@ -69,5 +74,15 @@ class StudentEnrollment
     public function getStudentId()
     {
         return $this->getStudent()->getId();
+    }
+
+    public function getEnrolledAt()
+    {
+        return $this->enrolledAt;
+    }
+
+    public function setEnrolledAt(\DateTime $enrolledAt)
+    {
+        $this->enrolledAt = $enrolledAt;
     }
 }
