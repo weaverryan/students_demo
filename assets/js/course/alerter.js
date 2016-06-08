@@ -1,8 +1,10 @@
 
 
 var alerter = {
-    initialize: function() {
-        $('#course_edit').on('click', '.js-alert', $.proxy(this._handleSendAlertClick, this));
+    initialize: function($wrapper) {
+        this.$wrapper = $wrapper;
+
+        this.$wrapper.on('click', '.js-alert', $.proxy(this._handleSendAlertClick, this));
     },
 
     _handleSendAlertClick: function(e) {
@@ -13,7 +15,7 @@ var alerter = {
         var newLink = $(e.currentTarget).clone();
         newLink.data('message', 'Other');
         newLink.html('Other clicky');
-        $('#course_edit').append(newLink);
+        this.$wrapper.append(newLink);
 
         this.sendAlert(message);
     },
