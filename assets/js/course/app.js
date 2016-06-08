@@ -1,12 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-
-var Hello = React.createClass({
-  render: function() {
-    return <h1>Hello</h1>
-  }
-});
+var CourseApp = require('./Components/CourseApp.react');
 
 $(document).ready(function() {
-    ReactDOM.render(<Hello/>, document.getElementById('course_edit'));
+    ReactDOM.render(<CourseApp/>, document.getElementById('course_edit'));
 });
