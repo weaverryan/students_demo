@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Course;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -18,6 +19,16 @@ class CourseController extends Controller
         
         return $this->render('course/list.html.twig', [
             'courses' => $courses,
+        ]);
+    }
+
+    /**
+     * @Route("/courses/{id}", name="course_edit")
+     */
+    public function editAction(Course $course)
+    {
+        return $this->render('course/edit.html.twig', [
+            'course' => $course
         ]);
     }
 }
