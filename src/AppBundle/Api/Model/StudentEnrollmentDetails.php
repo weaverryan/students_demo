@@ -2,6 +2,19 @@
 
 namespace AppBundle\Api\Model;
 
+use Hateoas\Configuration\Annotation as Hateoas;
+
+/**
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_enrollment_delete",
+ *          parameters={
+                "id": "expr(object.getId())"
+ *          }
+ *      )
+ * )
+ */
 class StudentEnrollmentDetails
 {
     private $id;

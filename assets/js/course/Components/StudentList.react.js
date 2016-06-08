@@ -19,7 +19,7 @@ var StudentList = React.createClass({
         });
 
         var self = this;
-        var url = enrollments[matchedKey].url;
+        var url = enrollments[matchedKey]._links.self.href;
         $.ajax({
             url: url,
             method: 'DELETE',
