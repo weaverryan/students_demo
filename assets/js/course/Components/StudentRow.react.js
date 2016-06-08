@@ -5,7 +5,8 @@ var StudentRow = React.createClass({
     getInitialState: function() {
         return {
             isProcessing: false,
-            inEditMode: false
+            inEditMode: false,
+            enrollment: this.props.enrollment
         }
     },
 
@@ -26,8 +27,17 @@ var StudentRow = React.createClass({
         });
     },
 
+    updateEnrollmentField: function(key, value) {
+        var enrollment = this.state.enrollment;
+        enrollment[key] = value;
+
+        this.setState({
+            enrollment: enrollment
+        });
+    },
+
     getFullName: function() {
-        return this.props.enrollment.firstName+' '+this.props.enrollment.lastName
+        return this.state.enrollment.firstName+' '+this.state.enrollment.lastName
     },
 
     render: function () {
@@ -49,16 +59,19 @@ var StudentRow = React.createClass({
         if (this.state.inEditMode) {
             editWidget = (
                 <td style={{'width': '50%'}}>
-                    <StudentEditForm />
+                    <StudentEditForm
+                        enrollment={this.state.enrollment}
+                        onUpdateEnrollmentField={this.updateEnrollmentField}
+                    />
                 </td>
             );
         }
 
         return (
             <tr>
-                <td>{this.props.enrollment.email}</td>
+                <td>{this.state.enrollment.email}</td>
                 <td>{this.getFullName()}</td>
-                <td>{this.props.enrollment.enrolledAt}</td>
+                <td>{this.state.enrollment.enrolledAt}</td>
                 <td>
                     {buttons}
                 </td>
