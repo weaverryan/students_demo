@@ -2,10 +2,14 @@
 
 namespace AppBundle\Controller\Api;
 
+use AppBundle\Entity\Student;
+use AppBundle\Form\StudentForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class StudentController extends Controller
 {
@@ -13,8 +17,23 @@ class StudentController extends Controller
      * @Route("/api/students", name="api_student_create")
      * @Method("POST")
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
-        return new JsonResponse([], 201);
+        $form = $this->createForm(StudentForm::class);
+        $data = json_decode($request->getContent(), true);
+        $form->submit($data);
+
+        if (!$form->isValid()) {
+            throw new BadRequestHttpException();
+        }
+
+        /** @var Student $student */
+        $student = $form->getData();
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($student);
+        $em->flush();
+
+        return new JsonResponse(['id' => $student->getId()], 201);
     }
 }
