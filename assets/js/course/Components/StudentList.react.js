@@ -18,10 +18,18 @@ var StudentList = React.createClass({
             }
         });
 
-        enrollments.splice(matchedKey, 1);
+        var self = this;
+        var url = enrollments[matchedKey].url;
+        $.ajax({
+            url: url,
+            method: 'DELETE',
+            'success': function() {
+                enrollments.splice(matchedKey, 1);
 
-        this.setState({
-            'enrollments': enrollments
+                self.setState({
+                    'enrollments': enrollments
+                });
+            }
         });
     },
 

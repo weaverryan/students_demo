@@ -36,7 +36,8 @@ class CourseController extends Controller
                 $studentEnrollment->getStudent()->getEmail(),
                 $studentEnrollment->getStudent()->getFirstName(),
                 $studentEnrollment->getStudent()->getLastName(),
-                $studentEnrollment->getEnrolledAt()
+                $studentEnrollment->getEnrolledAt(),
+                $this->generateUrl('api_enrollment_delete', ['id' => $studentEnrollment->getId()])
             );
         }
 

@@ -14,13 +14,16 @@ class StudentEnrollmentDetails
 
     private $enrolledAt;
 
-    public function __construct($id, $email, $firstName, $lastName, \DateTime $enrolledAt)
+    private $url;
+
+    public function __construct($id, $email, $firstName, $lastName, \DateTime $enrolledAt, $url)
     {
         $this->id = $id;
         $this->email = $email;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->enrolledAt = $enrolledAt;
+        $this->url = $url;
     }
 
     public function getId()
@@ -46,5 +49,10 @@ class StudentEnrollmentDetails
     public function getEnrolledAt()
     {
         return $this->enrolledAt;
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
     }
 }
