@@ -21,7 +21,8 @@ class StudentForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Student::class
+            'data_class' => Student::class,
+            'csrf_protection' => false,
         ]);
     }
 }
