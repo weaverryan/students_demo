@@ -3,13 +3,7 @@
 {% block javascripts %}
     {{ parent() }}
 
-    <script>
-        jQuery(document).ready(function() {
-            $('#course_edit .js-alert').on('click', function() {
-                alert('yay!');
-            });
-        });
-    </script>
+    <script src="{{ asset('js/course.js') }}"></script>
 {% endblock %}
 
 {% block body %}
