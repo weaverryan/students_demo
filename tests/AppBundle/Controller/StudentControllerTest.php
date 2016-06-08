@@ -76,4 +76,24 @@ class StudentControllerTest extends ApiTestCase
             'Ryan2'
         );
     }
+
+    public function testFailValidation()
+    {
+        $student = $this->createStudent('weaverryan@gmail.com', 'Ryan');
+
+        $data = [
+            'email' => 'weaverryan@gmail.com',
+        ];
+
+        $response = $this->client->post(sprintf('/api/students', $student->getId()), [
+            'body' => json_encode($data)
+        ]);
+
+        $this->assertEquals(400, $response->getStatusCode());
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            'errors.email[0]',
+            'This email is already taken'
+        );
+    }
 }
