@@ -25,7 +25,7 @@ class StudentController extends ApiBaseController
         $this->submitForm($request, $form);
 
         if (!$form->isValid()) {
-            throw new BadRequestHttpException();
+            return $this->createFailedValidationResponse($form);
         }
 
         /** @var Student $student */
@@ -48,7 +48,7 @@ class StudentController extends ApiBaseController
         $this->submitForm($request, $form);
 
         if (!$form->isValid()) {
-            throw new BadRequestHttpException();
+            return $this->createFailedValidationResponse($form);
         }
 
         $em = $this->getDoctrine()->getManager();
