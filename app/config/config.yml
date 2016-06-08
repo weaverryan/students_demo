@@ -70,3 +70,4 @@ swiftmailer:
 hautelook_alice:
     db_drivers:
         orm: ~
+
