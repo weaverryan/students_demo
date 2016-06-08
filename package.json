@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/weaverryan/students_demo/issues"
   },
-  "homepage": "https://github.com/weaverryan/students_demo#readme"
+  "homepage": "https://github.com/weaverryan/students_demo#readme",
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4"
+  }
 }
