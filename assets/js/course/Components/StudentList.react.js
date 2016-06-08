@@ -1,7 +1,17 @@
 var React = require('react');
+var StudentRow = require('./StudentRow.react');
 
 var StudentList = React.createClass({
     render: function () {
+        var rows = this.props.enrollments.map(function(enrollment) {
+            return (
+                <StudentRow
+                    enrollment={enrollment}
+                    key={enrollment.id}
+                />
+            );
+        });
+
         return (
             <table className="table">
                 <thead>
@@ -11,6 +21,9 @@ var StudentList = React.createClass({
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
+                <tbody>
+                    {rows}
+                </tbody>
             </table>
         );
     }

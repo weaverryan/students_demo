@@ -6,7 +6,7 @@ var CourseApp = React.createClass({
       return (
           <div>
               <h1>{this.props.course.name}</h1>
-                <StudentList />
+                <StudentList enrollments={this.props.enrollments} />
           </div>
       );
   }
