@@ -51,4 +51,29 @@ class StudentControllerTest extends ApiTestCase
             'Ryan2'
         );
     }
+
+    public function testPATCHEditStudent()
+    {
+        $student = $this->createStudent('weaverryan@gmail.com', 'Ryan');
+
+        $data = [
+            'firstName' => 'Ryan2',
+        ];
+
+        $response = $this->client->patch(sprintf('/api/students/%s', $student->getId()), [
+            'body' => json_encode($data)
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            'email',
+            'weaverryan@gmail.com'
+        );
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            'firstName',
+            'Ryan2'
+        );
+    }
 }
