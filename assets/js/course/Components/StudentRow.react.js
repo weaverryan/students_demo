@@ -16,6 +16,7 @@ var StudentRow = React.createClass({
             <tr>
                 <td>{this.props.enrollment.email}</td>
                 <td>{this.getFullName()}</td>
+                <td>{this.props.enrollment.enrolledAt}</td>
                 <td>
                     <a href="#" onClick={this.handleDeleteClick}>X</a>
                 </td>
