@@ -96,4 +96,13 @@ class StudentControllerTest extends ApiTestCase
             'This email is already taken'
         );
     }
+
+    public function testDelete()
+    {
+        $student = $this->createStudent('weaverryan@gmail.com');
+
+        $response = $this->client->delete(sprintf('/api/students/%s', $student->getId()));
+
+        $this->assertEquals(204, $response->getStatusCode());
+    }
 }

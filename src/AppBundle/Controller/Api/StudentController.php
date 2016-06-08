@@ -57,4 +57,16 @@ class StudentController extends ApiBaseController
 
         return $this->createApiResponse($student);
     }
+
+    /**
+     * @Route("/api/students/{id}", name="api_student_delete")
+     */
+    public function deleteAction(Student $student)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($student);
+        $em->flush();
+
+        return new Response(null, 204);
+    }
 }
