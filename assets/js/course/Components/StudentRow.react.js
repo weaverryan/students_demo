@@ -1,10 +1,15 @@
 var React = require('react');
 
 var StudentRow = React.createClass({
+    getFullName: function() {
+        return this.props.enrollment.firstName+' '+this.props.enrollment.lastName
+    },
+
     render: function () {
         return (
             <tr>
-                <td>I'm a student row!</td>
+                <td>{this.props.enrollment.email}</td>
+                <td>{this.getFullName()}</td>
             </tr>
         )
     }
