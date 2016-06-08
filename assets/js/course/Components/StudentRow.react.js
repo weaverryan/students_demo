@@ -4,7 +4,7 @@ var StudentRow = React.createClass({
     handleDeleteClick: function(e) {
         e.preventDefault();
 
-        alert('clicked!');
+        this.props.onRemoveStudent();
     },
 
     getFullName: function() {

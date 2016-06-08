@@ -2,12 +2,37 @@ var React = require('react');
 var StudentRow = require('./StudentRow.react');
 
 var StudentList = React.createClass({
+    getInitialState: function() {
+        return {
+            'enrollments': this.props.enrollments
+        }
+    },
+
+    removeStudent(id) {
+        var matchedKey;
+        var enrollments = this.state.enrollments;
+
+        $.each(enrollments, function(key, student) {
+            if (student.id == id) {
+                matchedKey = key;
+            }
+        });
+
+        enrollments.splice(matchedKey, 1);
+
+        this.setState({
+            'enrollments': enrollments
+        });
+    },
+
     render: function () {
+        var self = this;
         var rows = this.props.enrollments.map(function(enrollment) {
             return (
                 <StudentRow
                     enrollment={enrollment}
                     key={enrollment.id}
+                    onRemoveStudent={self.removeStudent.bind(self, enrollment.id)}
                 />
             );
         });
