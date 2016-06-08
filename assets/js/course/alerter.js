@@ -1,5 +1,3 @@
-
-
 var alerter = function($wrapper) {
     this.initialize($wrapper);
 };
@@ -29,4 +27,4 @@ $.extend(alerter.prototype, {
     }
 });
 
-module.exports = alerter;
+export default alerter;
