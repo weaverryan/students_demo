@@ -17,6 +17,8 @@ class EnrollmentController extends ApiBaseController
         $em->remove($enrollment);
         $em->flush();
 
+        sleep(1);
+
         return new Response(null, 204);
     }
 }

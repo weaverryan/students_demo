@@ -19,5 +19,8 @@ module.exports = {
             }
         ]
     },
-    devtool: "#inline-source-map"
+    devtool: "#inline-source-map",
+    devServer: {
+        headers: { "Access-Control-Allow-Origin": "*" }
+    }
 }
