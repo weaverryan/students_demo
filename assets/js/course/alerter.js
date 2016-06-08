@@ -2,7 +2,7 @@
 
 var alerter = {
     initialize: function() {
-        $('#course_edit .js-alert').on('click', this._handleSendAlertClick);
+        $('#course_edit .js-alert').on('click', $.proxy(this._handleSendAlertClick, this));
     },
 
     _handleSendAlertClick: function(e) {
