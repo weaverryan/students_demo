@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class StudentController extends Controller
@@ -34,6 +35,11 @@ class StudentController extends Controller
         $em->persist($student);
         $em->flush();
 
-        return new JsonResponse(['id' => $student->getId()], 201);
+        $json = $this->container->get('jms_serializer')
+            ->serialize($student, 'json');
+
+        return new Response($json, 201, [
+            'Content-Type' => 'application/json'
+        ]);
     }
 }

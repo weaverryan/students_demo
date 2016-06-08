@@ -22,5 +22,10 @@ class StudentControllerTest extends ApiTestCase
         $this->assertEquals(201, $response->getStatusCode());
         $this->asserter()
             ->assertResponsePropertyExists($response, 'id');
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            'firstName',
+            'Ryan'
+        );
     }
 }
