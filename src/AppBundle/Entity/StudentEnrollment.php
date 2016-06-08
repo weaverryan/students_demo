@@ -3,10 +3,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="student_enrollment")
+ * @Serializer\ExclusionPolicy("all")
  */
 class StudentEnrollment
 {
@@ -14,6 +16,7 @@ class StudentEnrollment
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     * @Serializer\Expose()
      */
     private $id;
 
@@ -58,5 +61,13 @@ class StudentEnrollment
     public function setStudent(Student $student)
     {
         $this->student = $student;
+    }
+
+    /**
+     * @Serializer\VirtualProperty()
+     */
+    public function getStudentId()
+    {
+        return $this->getStudent()->getId();
     }
 }

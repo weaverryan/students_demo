@@ -24,5 +24,10 @@ class CourseControllerTest extends ApiTestCase
             $response,
             'id' // id of the enrollment
         );
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            'studentId',
+            $student->getId()
+        );
     }
 }
