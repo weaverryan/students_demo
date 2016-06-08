@@ -2,6 +2,7 @@
 
 namespace AppBundle\Test;
 
+use AppBundle\Entity\Course;
 use AppBundle\Entity\Student;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManager;
@@ -32,6 +33,16 @@ trait DataHelperTrait
         $this->getEntityManager()->flush();
 
         return $student;
+    }
+
+    protected function createCourse($name)
+    {
+        $course = new Course();
+        $course->setName($name);
+        $this->getEntityManager()->persist($course);
+        $this->getEntityManager()->flush();
+
+        return $course;
     }
 
     private function purgeDatabase()
