@@ -28,4 +28,27 @@ class StudentControllerTest extends ApiTestCase
             'Ryan'
         );
     }
+
+    public function testPUTEditStudent()
+    {
+        $student = $this->createStudent('weaverryan@gmail.com', 'Ryan');
+
+        $data = [
+            'email' => 'weaverryan@gmail.com',
+            'firstName' => 'Ryan2',
+        ];
+
+        $response = $this->client->put(sprintf('/api/students/%s', $student->getId()), [
+            'body' => json_encode($data)
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->asserter()
+            ->assertResponsePropertyEquals($response, 'id', $student->getId());
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            'firstName',
+            'Ryan2'
+        );
+    }
 }
